@@ -4,22 +4,22 @@ var router = express.Router();
 
 /* GET home page. */
 
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
   var datos=
   {
-      dpiPapa: req.query.dpiPapa,
-      dpiMama: req.query.dpiMama,
-      apellidos:req.query.apellidos,
-      nombres: req.query.nombres,
-      genero:req.query.genero,
-      fecha:req.query.fecha,
-      departamento:req.query.departamento,
-      municipio:req.query.municipio,
+      dpiPapa: req.body.dpiPapa,
+      dpiMama: req.body.dpiMama,
+      apellidos:req.body.apellidos,
+      nombres: req.body.nombres,
+      genero:req.body.genero,
+      fecha:req.body.fecha,
+      departamento:req.body.departamento,
+      municipio:req.body.municipio,
       resultado:"acta en proceso",
       
   }
   console.log(datos); 
-  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos);
+  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())
@@ -30,13 +30,13 @@ router.get('/', function(req, res, next) {
         }
         else
         {
-           datos.resultado="el nombre no es valido"
+           datos.resultado="nombre o apellidos  no es valido"
         }
     }
     else 
     {
     
-      datos.resultado="el numero de dpi no es valido deben ser solo numero sin guiones o sinos y de longitud 13"
+      datos.resultado="el numero de dpi no es valido deben ser solo numero sin guiones o signos y de longitud 13"
     }
   }
   else 
