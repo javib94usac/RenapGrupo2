@@ -1,5 +1,5 @@
 var express = require('express');
-//var compro = require("../public/javascripts/Comprobaciones.js");
+var compro = require("../public/javascripts/Comprobaciones.js");
 var router = express.Router();
 
 /* GET home page. */
@@ -7,26 +7,19 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpiPapa: req.body.dpiEsposo,
-      dpiMama: req.body.dpiEsposa,
+      dpiEsposo: req.body.dpiEsposo,
+      dpiEsposa: req.body.dpiEsposa,
       fecha:req.body.fecha,
       resultado:"acta en proceso",
       
   }
   console.log(datos); 
- /* var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento);
+  var comprobar= new compro(datos.dpiEsposa,datos.dpiEsposo,datos.fecha);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())
     {
-        if(comprobar.get_nombre_valido())
-        {
-          datos.resultado="datos de acta correcto"
-        }
-        else
-        {
-           datos.resultado="nombre o apellidos  no es valido"
-        }
+        datos.resultado="datos de acta correcto"
     }
     else 
     {
@@ -38,7 +31,7 @@ router.post('/', function(req, res, next) {
   {
   
     datos.resultado="debe llenar todos los campos"
-  }*/
+  }
   res.render('index',{datos})
   
 });
