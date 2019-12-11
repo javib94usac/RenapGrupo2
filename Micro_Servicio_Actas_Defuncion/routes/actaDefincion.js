@@ -1,5 +1,5 @@
 var express = require('express');
-//var compro = require("../public/javascripts/Comprobaciones.js");
+var compro = require("../public/javascripts/Comprobaciones.js");
 var router = express.Router();
 
 /* GET home page. */
@@ -13,10 +13,10 @@ router.post('/', function(req, res, next) {
       
   }
   console.log(datos); 
-  //var comprobar= new compro(datos.dpi);
-  /*if(comprobar.get_vacio())
+  var comprobar= new compro(datos.dpi,datos.fecha);
+  if(comprobar.get_vacio())
   {
-    if (comprobar.get_dpi_validos())
+    if (comprobar.get_dpi_valido())
     {
        
           datos.resultado="datos de acta correcto"
@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
   {
   
     datos.resultado="debe llenar todos los campos"
-  }*/
+  }
   res.render('index',{datos})
   
 });
