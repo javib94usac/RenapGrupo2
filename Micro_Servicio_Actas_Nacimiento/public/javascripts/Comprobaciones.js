@@ -35,9 +35,9 @@ class Comprobaciones {
     {
         if(!isNaN(this.dpiPadre.trim())&&!isNaN(this.dpiMadre.trim()))
         {
-            console.log('-----');
+            /*console.log('-----');
             console.log(this.dpiPadre.length);
-            console.log(this.dpiMadre.length);
+            console.log(this.dpiMadre.length);*/
             if(this.dpiPadre.length==13&&this.dpiMadre.length==13)
             {
                 return true
@@ -47,8 +47,8 @@ class Comprobaciones {
         }
         else
         {
-            console.log(this.dpiPadre.length);
-            console.log(this.dpiMadre.length);
+            /*console.log(this.dpiPadre.length);
+            console.log(this.dpiMadre.length);*/
             return false;
         }
     }
