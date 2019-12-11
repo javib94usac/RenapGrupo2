@@ -3,7 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  datos=
+  {
+    titulo:"Bienvenido al Sistema de actas de defunciones",
+    mensaje:""
+  }
+  res.render('index', {datos});
 });
 
 module.exports = router;
