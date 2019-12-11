@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
       
   }
   console.log(datos); 
-  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento);
+  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento,datos.fecha);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())

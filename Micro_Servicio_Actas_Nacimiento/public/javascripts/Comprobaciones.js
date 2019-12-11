@@ -1,5 +1,5 @@
 class Comprobaciones {
-    constructor(dpi1,dpi2, nombres,apellisdos,municiopio,departamento) {
+    constructor(dpi1,dpi2, nombres,apellisdos,municiopio,departamento,fecha) {
       
         this.nombres=nombres;
         this.apellisdos=apellisdos;
@@ -7,10 +7,11 @@ class Comprobaciones {
         this.dpiMadre=dpi2;
         this.municiopio=municiopio;
         this.departamento=departamento;
+        this.fecha=fecha
     }
     get_vacio()
     {
-        if(this.nombres!=""&&this.apellisdos!=""&&this.dpiPadre!=""&&this.dpiMadre!=""&&this.municiopio!=""&&this.departamento!="")
+        if(this.nombres!=""&&this.apellisdos!=""&&this.dpiPadre!=""&&this.dpiMadre!=""&&this.municiopio!=""&&this.departamento!=""&&this.fecha!="")
         {
             return true;
         }
