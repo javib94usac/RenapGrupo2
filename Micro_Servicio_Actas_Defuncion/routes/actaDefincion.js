@@ -7,31 +7,20 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpiPapa: req.body.dpiPapa,
-      dpiMama: req.body.dpiMama,
-      apellidos:req.body.apellidos,
-      nombres: req.body.nombres,
-      genero:req.body.genero,
+      dpi: req.body.dpi,
       fecha:req.body.fecha,
-      departamento:req.body.departamento,
-      municipio:req.body.municipio,
       resultado:"acta en proceso",
       
   }
   console.log(datos); 
-  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento,datos.fecha);
+  var comprobar= new compro(datos.dpi,datos.fecha);
   if(comprobar.get_vacio())
   {
-    if (comprobar.get_dpi_validos())
+    if (comprobar.get_dpi_valido())
     {
-        if(comprobar.get_nombre_valido())
-        {
+       
           datos.resultado="datos de acta correcto"
-        }
-        else
-        {
-           datos.resultado="nombre o apellidos  no es valido"
-        }
+       
     }
     else 
     {
