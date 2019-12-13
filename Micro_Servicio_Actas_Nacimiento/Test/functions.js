@@ -1,4 +1,4 @@
-var comprobar= require('../public/javascripts/comprobaciones.js')
+var comprobar= require('../public/javascripts/Comprobaciones.js')
 //dpi1,dpi2, nombres,apellisdos,municiopio,departamento,fecha
 class prueba
 {
