@@ -18,7 +18,7 @@ test ('comprobar que los campos no venga vacios',()=>{
 */
 test ('comprobar que no dpi sea valido',()=>{
     var prueba=new pruebas();
-    expect(prueba.comprobarDpi("12345")).toBeFalsy();
+    expect(prueba.comprobarDpi("1235-")).toBeFalsy();
 });
 
 test ('comprobar que los campos  venga vacios',()=>{
