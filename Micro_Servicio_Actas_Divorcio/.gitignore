@@ -1,0 +1,7 @@
+/dist
+*/dist
+/node_modules
+*/node_modules
+*/Test/node_modules
+*/Test/ouput
+/Tests/node_modules
