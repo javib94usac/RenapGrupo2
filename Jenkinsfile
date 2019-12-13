@@ -28,6 +28,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
+                sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
                 sh 'npm --version'
 
