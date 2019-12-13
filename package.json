@@ -1,0 +1,20 @@
+{
+  "name": "RenapGrupo2",
+  "version": "1.0.0",
+  "description": "Sistema basado en microservicios, registro de personas, matrimonios y licencias de conducir.\r tecnologias usadas\r lenguaje javascript\r servidor corriendo en nodejs\r npm vercion 6.4.1\r express version 4.16.1\r javascript ES6\r --------------------------------------------\r comando para instalar cada micro-servicio\r npm install\r comando para instalar pruebas\r npm install\r --------------------------------------------\r comando para correr al micro-servicio\r npm start\r comando para correr la prueba\r npm test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javib94usac/RenapGrupo2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javib94usac/RenapGrupo2/issues"
+  },
+  "homepage": "https://github.com/javib94usac/RenapGrupo2#readme"
+}
