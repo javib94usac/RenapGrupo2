@@ -1,3 +1,6 @@
+/*
+ clase de comprobaciones
+*/
 class Comprobaciones {
     constructor(dpi1,dpi2, fecha) {
       
