@@ -2,7 +2,7 @@ var pruebas =require('./functions');
 
 test ('comprobar que dpi sea valido',()=>{
      var prueba=new pruebas();
-     expect(prueba.comprobarDpi("1234567890123")).toBeTruthy();
+     expect(prueba.comprobarDpi("123456790123")).toBeTruthy();
 });
 
 test ('comprobar que los campos no venga vacios',()=>{

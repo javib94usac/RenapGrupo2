@@ -3,7 +3,12 @@ var compro = require("../public/javascripts/Comprobaciones.js");
 var router = express.Router();
 
 /* GET home page. */
-
+/*
+  controlador del la pagina
+  si los datos estan correctos 
+  se manda al esb
+  sino da el mensaje de error
+*/
 router.post('/', function(req, res, next) {
   var datos=
   {
