@@ -1,3 +1,0 @@
-
-Tagging
-https://softwareengineering.stackexchange.com/questions/165725/git-branching-and-tagging-best-practices
