@@ -1,11 +1,5 @@
 var Compro = require('../public/javascripts/Comprobaciones.js');
 
-/*const functions = {
-  comprobarDPI: (dpi) => dpi
-
-};*/
-
-
 class pruebas
 {
 
