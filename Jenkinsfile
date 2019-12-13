@@ -8,10 +8,13 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm install'
                 sh 'cd ../..'
+                sh 'ls'
                 sh 'cd Micro_Servicio_Actas_Defuncion && npm install'
-                sh 'cd ../..'
+                sh 'cd ..'
+                
                 sh 'cd Micro_Servicio_Actas_Defuncion/Test && npm install'
                 sh 'cd ../..'
+                sh 'ls'
             }   
         }
         stage('test') {
