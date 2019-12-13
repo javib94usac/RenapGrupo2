@@ -1,11 +1,27 @@
 var pruebas =require('./functions');
+/*
 
+    verficar con datos validos
+*/
 test ('comprobar que dpi sea valido',()=>{
      var prueba=new pruebas();
-     expect(prueba.comprobarDpi("123456790123")).toBeTruthy();
+     expect(prueba.comprobarDpi("1234567980123")).toBeTruthy();
 });
 
 test ('comprobar que los campos no venga vacios',()=>{
     var prueba=new pruebas();
-    expect(prueba.comprobarCamposNoVenganBacios("123456789012","ddd")).toBeTruthy();
+    expect(prueba.comprobarCamposNoVenganBacios("1234567890123","ddd")).toBeTruthy();
+});
+/*
+
+    verficar con no datos validos
+*/
+test ('comprobar que no dpi sea valido',()=>{
+    var prueba=new pruebas();
+    expect(prueba.comprobarDpi("12345")).toBeFalsy();
+});
+
+test ('comprobar que los campos  venga vacios',()=>{
+   var prueba=new pruebas();
+   expect(prueba.comprobarCamposNoVenganBacios("","ddd")).toBeFalsy();
 });
