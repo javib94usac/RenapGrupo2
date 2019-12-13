@@ -13,3 +13,18 @@ test('comprobar que los nombres y apellidos sean validos',()=>{
     var prueba=new pruebas();
     expect(prueba.comprobarNombresApellidosCorectos("perez perez","ana sofia")).toBeTruthy();
 });
+/* pruebas con datos que no son correctos */
+
+test ('comprobar que dpi no sea valido',()=>{
+    var prueba=new pruebas();
+    expect(prueba.comprobarDpi("123567890123","134567890123")).toBeFalsy();
+});
+
+test ('comprobar que los campos venga vacios',()=>{
+   var prueba=new pruebas();
+   expect(prueba.comprobarCamposNoVenganBacios("123456789012","","iii","www","ddddd","www","ddd")).toBeFalsy();
+});
+test('comprobar que los nombres y apellidos no sean validos',()=>{
+   var prueba=new pruebas();
+   expect(prueba.comprobarNombresApellidosCorectos("perez perez8","ana sofia9")).toBeFalsy();
+});
