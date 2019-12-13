@@ -1,5 +1,7 @@
 var pruebas =require('./functions');
 
+
+/*funcionaleidade que los valores sean validos */
 test ('comprobar que dpi sea valido',()=>{
      var prueba=new pruebas();
      expect(prueba.comprobarDpi("1234567890123","1234567890123")).toBeTruthy();

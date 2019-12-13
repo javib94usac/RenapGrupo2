@@ -1,3 +1,12 @@
+/*
+    clase que comprueba que los 
+    datos sean validos
+        -dpi
+        -nombre
+        -fecha
+        -municipio
+        -departamentos
+* */
 class Comprobaciones {
     constructor(dpi1,dpi2, nombres,apellisdos,municiopio,departamento,fecha) {
       
