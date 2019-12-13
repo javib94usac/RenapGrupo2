@@ -1,4 +1,4 @@
-var comprobar= require('../public/javascripts/comprobaciones.js')
+var comprobar= require('../public/javascripts/Comprobaciones.js')
 
 class prueba
 {
