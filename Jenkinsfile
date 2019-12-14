@@ -68,7 +68,7 @@ pipeline {
                 sh 'su javib94'
                 sh 'cd /home/javib94/app/RenapGrupo2'
                 sh 'eval $(ssh-agent -s)'
-                sh 'ssh-add ~/.ssh/javib94'
+                sh 'ssh-add /home/javib94/.ssh/javib94'
                 sh 'git checkout cicd'
                 sh 'git pull'
                 sh 'docker-compose down'
