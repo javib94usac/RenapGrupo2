@@ -50,7 +50,8 @@ pipeline {
                 sh 'cd ../..'
             }
         }
-        stage('deploy') {
+        stage('Deploy') {
+            agent none
             steps {
                 sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
