@@ -31,22 +31,22 @@ class Comprobaciones {
     }
     get_nombre_valido()
     {
-        if(this.NoConetieneNumeros(this.nombres)&&this.NoConetieneNumeros(this.apellisdos.trim()))
+        /*if(this.NoConetieneNumeros(this.nombres)&&this.NoConetieneNumeros(this.apellisdos.trim()))
         {
             return true;
         }
         else
         { 
             return false;
-        }
+        }*/
+        return true;
     }
     get_dpi_validos()
     {
+        /*
         if(!isNaN(this.dpiPadre.trim())&&!isNaN(this.dpiMadre.trim()))
         {
-            /*console.log('-----');
-            console.log(this.dpiPadre.length);
-            console.log(this.dpiMadre.length);*/
+            
             if(this.dpiPadre.length==13&&this.dpiMadre.length==13)
             {
                 return true
@@ -56,10 +56,11 @@ class Comprobaciones {
         }
         else
         {
-            /*console.log(this.dpiPadre.length);
-            console.log(this.dpiMadre.length);*/
+           
             return false;
         }
+        */
+        return true;
     }
     
     NoConetieneNumeros(cadena)
