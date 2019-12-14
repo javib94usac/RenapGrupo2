@@ -33,7 +33,11 @@ pipeline {
                   }
         }
         stage('Test') {
-            agent { label 'nodejscontainer'  }
+            agent {  
+                docker { 
+                    label 'nodejscontainer'
+                }  
+            }
             steps {
         
                 sh 'echo Corriendo Pruebas......'
