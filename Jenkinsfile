@@ -58,7 +58,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
-                    label 'localserver'
+                    label 'master'
                     customWorkspace '/home/javib94/app/RenapGrupo2/'
                 }
             }
