@@ -31,19 +31,19 @@ class Comprobaciones {
     }
     get_nombre_valido()
     {
-        /*if(this.NoConetieneNumeros(this.nombres)&&this.NoConetieneNumeros(this.apellisdos.trim()))
+        if(this.NoConetieneNumeros(this.nombres)&&this.NoConetieneNumeros(this.apellisdos.trim()))
         {
             return true;
         }
         else
         { 
             return false;
-        }*/
-        return true;
+        }
+        //return true;
     }
     get_dpi_validos()
     {
-        /*
+        
         if(!isNaN(this.dpiPadre.trim())&&!isNaN(this.dpiMadre.trim()))
         {
             
@@ -59,8 +59,8 @@ class Comprobaciones {
            
             return false;
         }
-        */
-        return true;
+        
+        //return true;
     }
     
     NoConetieneNumeros(cadena)
