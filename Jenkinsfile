@@ -67,8 +67,8 @@ pipeline {
                 sh 'echo Actualizando el servidor...'
                 sh 'cd /home/javib94/app/RenapGrupo2/'
                 sh 'eval $(ssh-agent -s)'
-                sh 'git checkout cicd'
                 sh 'git pull origin cicd'
+                sh 'git checkout cicd'
                 sh 'docker-compose down'
                 sh 'docker-compose up -d'
             }
