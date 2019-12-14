@@ -1,7 +1,8 @@
 pipeline {
-    agent { docker { image 'node:6.3' } }
+    agent none 
     stages {
         stage('Build') {
+            agent { docker { image 'node:6.3' } }
             steps {
                 sh 'echo Instalando Dependencias......'
                 sh 'npm install jshint -g'
@@ -26,6 +27,7 @@ pipeline {
             }   
         }
         stage('Test') {
+            agent { docker { image 'node:6.3' } }
             steps {
                 sh 'echo Corriendo Pruebas......'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm run test'
@@ -51,7 +53,6 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent none
             steps {
                 sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
