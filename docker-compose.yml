@@ -1,0 +1,34 @@
+version: '3'
+services:
+    Defuncion:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: npm start
+        volumes:
+          - ./Micro_Servicio_Actas_Defuncion:/usr/app/
+        ports:
+          - "9002:9002"
+    Divorcio:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: npm start
+        volumes:
+          - ./Micro_Servicio_Actas_Divorcio:/usr/app/
+        ports:
+          - "9003:9003"
+    Matrimonio:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: npm start
+        volumes:
+          - ./Micro_Servicio_Actas_Matrimonio:/usr/app/
+        ports:
+          - "9001:9001"
+    Nacimiento:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: npm start
+        volumes:
+          - ./Micro_Servicio_Actas_Nacimiento:/usr/app/
+        ports:
+          - "9000:9000"
