@@ -54,12 +54,13 @@ pipeline {
             steps {
                 sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
-                /*sh 'cd /home/javib94/app/RenapGrupo2/'
+                sh 'cd /home/javib94/app/RenapGrupo2/'
                 sh 'eval $(ssh-agent -s)'
                 sh 'ssh-add ~/.ssh/javib94'
+                sh 'git checkout cicd'
                 sh 'git pull origin cicd'
-                sh 'npm --version'
-*/
+                sh 'docker-compose down'
+                sh 'docker-compose up -d'
             }
         }
     }
