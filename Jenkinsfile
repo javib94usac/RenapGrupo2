@@ -67,6 +67,7 @@ pipeline {
                 sh 'echo Actualizando el servidor...'
                 sh 'su javib94'
                 sh 'cd /home/javib94/app/RenapGrupo2'
+                sh 'sed -i \'s+https://github.com+ssh://git@github.com+g\' .git/config'
                 sh 'eval $(ssh-agent -s)'
                 sh 'ssh-add /home/javib94/.ssh/javib94'
                 sh 'git checkout cicd'
