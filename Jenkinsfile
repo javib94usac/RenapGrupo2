@@ -1,7 +1,7 @@
 pipeline {
     agent none 
     stages {
-        stage('Build') {
+        stage('Build and Test') {
             agent { docker { image 'node:6.3' } }
             steps {
                 sh 'echo Instalando Dependencias......'
@@ -24,11 +24,6 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Divorcio/Test && npm install'
                 sh 'cd ../..'
-            }   
-        }
-        stage('Test') {
-            agent { docker { image 'node:6.3' } }
-            steps {
                 sh 'echo Corriendo Pruebas......'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm run test'
                 sh 'cd ..'
