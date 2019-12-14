@@ -1,8 +1,14 @@
 pipeline {
     agent none 
     stages {
-        stage('Build and Test') {
-            agent { docker { image 'node:6.3' } }
+        stage('Build') {
+            agent { 
+                docker { 
+                    image 'node:6.3' 
+                    label 'nodejscontainer'
+                } 
+                
+            }
             steps {
                 sh 'echo Instalando Dependencias......'
                 sh 'npm install jshint -g'
@@ -24,6 +30,10 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Divorcio/Test && npm install'
                 sh 'cd ../..'
+        stage('Test') {
+            agent { label 'nodejscontainer'  }
+            steps {
+        
                 sh 'echo Corriendo Pruebas......'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm run test'
                 sh 'cd ..'
@@ -49,6 +59,12 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+                node {
+                    label 'localserver'
+                    customWorkspace '/home/javib94/app/RenapGrupo2/'
+                }
+            }
             steps {
                 sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
