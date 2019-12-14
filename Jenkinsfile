@@ -5,7 +5,6 @@ pipeline {
             agent { 
                 docker { 
                     image 'node:6.3' 
-                    label 'nodejscontainer'
                 } 
                 
             }
@@ -30,16 +29,7 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Divorcio/Test && npm install'
                 sh 'cd ../..'
-                  }
-        }
-        stage('Test') {
-            agent {  
-                docker { 
-                    image 'node:6.3' 
-                    label 'nodejscontainer'
-                }  
-            }
-            steps {
+                  
         
                 sh 'echo Corriendo Pruebas......'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm run test'
