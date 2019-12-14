@@ -35,6 +35,7 @@ pipeline {
         stage('Test') {
             agent {  
                 docker { 
+                    image 'node:6.3' 
                     label 'nodejscontainer'
                 }  
             }
