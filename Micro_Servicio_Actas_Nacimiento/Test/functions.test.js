@@ -19,7 +19,7 @@ test('comprobar que los nombres y apellidos sean validos',()=>{
 
 test ('comprobar que dpi no sea valido',()=>{
     var prueba=new pruebas();
-    expect(prueba.comprobarDpi("123567890123","134567890123")).toBeFalsy();
+    expect(prueba.comprobarDpi("1235678901232","1345678901233")).toBeFalsy();
 });
 
 test ('comprobar que los campos venga vacios',()=>{
