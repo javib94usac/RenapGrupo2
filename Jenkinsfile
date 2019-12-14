@@ -30,6 +30,8 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Divorcio/Test && npm install'
                 sh 'cd ../..'
+                  }
+        }
         stage('Test') {
             agent { label 'nodejscontainer'  }
             steps {
