@@ -1,7 +1,7 @@
 var express = require('express');
 var compro = require("../public/javascripts/Comprobaciones.js");
 var router = express.Router();
-cont axios = require("axios");
+const axios = require("axios");
 
 /* GET home page. */
 
@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
             var parametros = {
               url: "http://localhost:9006/setDefuncion",
               tipo: "POST",
-              parametros = datos
+              parametros : datos
               
             };
             let uri = "http://localhost:10000/enrutar";
