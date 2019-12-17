@@ -12,5 +12,5 @@ app.use(api);
 
 
 app.listen(10000,function(){
-    console.log(" esta vivo en el puerto 10000");
+    console.log(" esta vivo en el puerto 10000 puto el que lo lea");
 });
