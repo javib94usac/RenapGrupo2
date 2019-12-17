@@ -11,15 +11,15 @@ router.post("/", function(req, res, next) {
     dpih: req.body.dpiHombre, //dpi  del hombre, futuro esposo
     dpim: req.body.dpiMujer, // dpi de la mujer, futura esposa
     fecha: req.body.fecha,    // fecha en la que se casaron
-    respuesta: "Acta en proceso"
+    resultado: "Acta en proceso"
   };
   console.log(datos);
    var comprobar = new compro(datos.dpih,datos.dpim,datos.fecha);
    if (comprobar.get_vacio()){
 
       if (comprobar.get_dpi_validos()){
-          datos.respuesta = "Datos a procesar correctos";
-          var parametros {
+          datos.resultado = "Datos a procesar correctos";
+          var parametros ={
               url: "http://localhost:9006/setMatrimonio",
               tipo: 'POST',
               parametros: datos
@@ -49,13 +49,13 @@ router.post("/", function(req, res, next) {
           });
 
       }else{
-          datos.respuesta = "Datos a procesar Incorrectos, los numeros de DPI deben de tener 13 caracteres";
+          datos.resultado = "Datos a procesar Incorrectos, los numeros de DPI deben de tener 13 caracteres";
              res.render("index", { datos });
       }
 
    }else {
 
-          datos.respuesta = "Debe de completar los campos";
+          datos.resultado = "Debe de completar los campos";
              res.render("index", { datos });
 
    }
