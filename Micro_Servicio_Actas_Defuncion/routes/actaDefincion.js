@@ -1,6 +1,7 @@
 var express = require('express');
 var compro = require("../public/javascripts/Comprobaciones.js");
 var router = express.Router();
+cont axios = require("axios");
 
 /* GET home page. */
 
