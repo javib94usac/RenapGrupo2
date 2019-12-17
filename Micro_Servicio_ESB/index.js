@@ -11,6 +11,6 @@ app.use(bodyParser.json());
 app.use(api);
 
 
-app.listen(5000,function(){
-    console.log(" esta vivo en el puerto 5000");
+app.listen(10000,function(){
+    console.log(" esta vivo en el puerto 10000");
 });
