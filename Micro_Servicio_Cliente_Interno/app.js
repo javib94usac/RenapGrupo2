@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var setNuevaContrasenaaRouter=require('./routes/setNuevaContrasena');
 var setDPIRouter=require('./routes/setDPI');
-//var setLicenciaRoutor=require('./routes/setLicencia');
+var setLicenciaRoutor=require('./routes/setLicencia');
 //var setActualizarRouter=require('./routes/setActualizar');
 
 var app = express();
@@ -27,7 +27,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/setNuevaContrasena',setNuevaContrasenaaRouter);
 app.use('/setDPI',setDPIRouter);
-//app.use('/setLicencia',setLicenciaRoutor);
+app.use('/setLicencia',setLicenciaRoutor);
 //app.use('/setActualizar',setActualizarRouter);
 
 // catch 404 and forward to error handler
