@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var setNuevaContrasenaaRouter=require('./routes/setNuevaContrasena');
-//var setDPIRouter=require('./routes/setDPI');
+var setDPIRouter=require('./routes/setDPI');
 //var setLicenciaRoutor=require('./routes/setLicencia');
 //var setActualizarRouter=require('./routes/setActualizar');
 
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/setNuevaContrasena',setNuevaContrasenaaRouter);
-//app.use('/setDPI',setDPIRouter);
+app.use('/setDPI',setDPIRouter);
 //app.use('/setLicencia',setLicenciaRoutor);
 //app.use('/setActualizar',setActualizarRouter);
 
