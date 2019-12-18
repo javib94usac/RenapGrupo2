@@ -8,6 +8,10 @@ services:
           - ./Micro_Servicio_Actas_Defuncion:/usr/app/
         ports:
           - "9002:9002"
+        networks:
+          main:
+            aliases:
+              - ServiceBus
     Divorcio:
         image: node:13.3.0
         working_dir: /usr/app
@@ -16,6 +20,10 @@ services:
           - ./Micro_Servicio_Actas_Divorcio:/usr/app/
         ports:
           - "9003:9003"
+        networks:
+          main:
+            aliases:
+              - ServiceBus
     Matrimonio:
         image: node:13.3.0
         working_dir: /usr/app
@@ -24,6 +32,10 @@ services:
           - ./Micro_Servicio_Actas_Matrimonio:/usr/app/
         ports:
           - "9001:9001"
+        networks:
+          main:
+            aliases:
+              - ServiceBus          
     Nacimiento:
         image: node:13.3.0
         working_dir: /usr/app
@@ -32,3 +44,24 @@ services:
           - ./Micro_Servicio_Actas_Nacimiento:/usr/app/
         ports:
           - "9000:9000"
+        networks:
+          main:
+            aliases:
+              - ServiceBus
+    ServiceBus:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: node index.js
+        volumes:
+          - ./Micro_Servicio_ESB:/usr/app/
+        ports:
+          - "10000:10000"
+        networks:
+          main:
+            aliases:
+              - Defuncion
+              - Divorcio
+              - Matrimonio
+              - Nacimiento
+networks:
+  main:
