@@ -17,12 +17,14 @@ const connection = mysql.createConnection({
 connection.connect(); // siempre hay que dajar la conexion abierta! 
 app.get('/',function(req,res){
     
+    /** 
+     *  ejemplo de como usar la base datos y regesar la info desde el res.send
+     */
    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
         if (err) throw err;
         console.log('The solution is: ', rows[0].solution);
+        res.send('servico de almacenamiento arriba');
       });
-      
-    res.send('servico de almacenamiento arriba');
    
 });
 /*set de almacenamineto 
