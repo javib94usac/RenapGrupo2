@@ -87,7 +87,7 @@ pipeline {
                 sh 'cd Micro_Servicio_Almacenamiento'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
                 sh 'cd ..'
-                sh 'cd Micro_Servicio_EBS'
+                sh 'cd Micro_Servicio_ESB'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
                 sh 'cd ..'
                 sh 'docker-compose down'
