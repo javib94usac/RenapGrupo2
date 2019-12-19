@@ -48,6 +48,18 @@ services:
           main:
             aliases:
               - ServiceBus
+    Almacenamiento:
+        image: node:13.3.0
+        working_dir: /usr/app
+        command: node index.js
+        volumes:
+          - ./Micro_Servicio_ESB:/usr/app/
+        ports:
+          - "9006:9006"
+        networks:
+          main:
+            aliases:
+              - ServiceBus
     ServiceBus:
         image: node:13.3.0
         working_dir: /usr/app
@@ -63,5 +75,6 @@ services:
               - Divorcio
               - Matrimonio
               - Nacimiento
+              - Almacenamiento     
 networks:
   main:
