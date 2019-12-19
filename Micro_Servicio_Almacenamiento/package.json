@@ -1,0 +1,15 @@
+{
+  "name": "micro_servicio_almacenamiento",
+  "version": "1.0.0",
+  "description": "micro servicio de almacenamiento conexcion con la base de datos y resive informacion y da consultas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hboiton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "password-generator": "^2.2.3"
+  }
+}
