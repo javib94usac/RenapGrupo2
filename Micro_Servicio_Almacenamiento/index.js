@@ -2,15 +2,29 @@ const  express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var generatePassword = require('password-generator');
+var mysql = require('mysql');
 //especificamos el subdirectorio donde se encuentran las páginas estáticas
 app.use(express.static(__dirname+'/public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+const connection = mysql.createConnection({
+    host: '35.226.255.150', // ip de la base datos
+    user: 'root',
+    password: '##ContraseñaDificil123',
+    database: 'renapgrupo2'
+  })
+connection.connect(); 
 app.get('/',function(req,res){
-
-     res.send('servico de almacenamiento arriba');
+    
+   connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows[0].solution);
+      });
+      
+      //connection.end();
+    res.send('servico de almacenamiento arriba');
+   
 });
 /*set de almacenamineto 
     crear una nueva acta de nacimiento
