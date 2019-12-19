@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
     password: '##ContraseñaDificil123',
     database: 'renapgrupo2'
   })
-connection.connect(); 
+connection.connect(); // siempre hay que dajar la conexion abierta! 
 app.get('/',function(req,res){
     
    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
@@ -22,7 +22,6 @@ app.get('/',function(req,res){
         console.log('The solution is: ', rows[0].solution);
       });
       
-      //connection.end();
     res.send('servico de almacenamiento arriba');
    
 });
