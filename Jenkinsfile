@@ -73,7 +73,7 @@ pipeline {
                 //sh 'echo $SSH_AUTH_SOCK'
                 //sh 'ssh-add /home/javib94/.ssh/javib94'
                 sh 'git checkout cicd'
-                sh 'git pull'
+                sh 'git pull origin cicd'
                 sh 'cd Micro_Servicio_Actas_Nacimiento'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
                 sh 'cd ..'
