@@ -25,7 +25,7 @@ services:
         volumes:
           - ./Micro_Servicio_Cliente_Interno:/usr/app/
         ports:
-          - "9005:9004"
+          - "9001:9004"
         networks:
           vpcbr:
             ipv4_address: 10.5.0.4    
@@ -58,7 +58,7 @@ services:
         volumes:
           - ./Micro_Servicio_Actas_Matrimonio:/usr/app/
         ports:
-          - "9001:9001"
+          - "9004:9001"
         networks:
           vpcbr:
             ipv4_address: 10.5.0.7    
