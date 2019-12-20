@@ -94,7 +94,7 @@ pipeline {
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Cliente_Interno'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
-                sh 'cd..'
+                sh 'cd ..'
                 sh 'docker-compose up -d'
             }
         }
