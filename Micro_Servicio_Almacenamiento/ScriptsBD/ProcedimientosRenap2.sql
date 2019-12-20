@@ -217,3 +217,181 @@ declare resultado text;
 		select resultado;
 END;
 
+
+-- PROCEDIMIENTO PARA CONSULTAR NACIMIENTOS
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: inserta o crea un nuevo divorcio
+-- ===========================================================================
+
+DELIMITER $$
+CREATE PROCEDURE obtenerNacimiento (
+		in idnacimiento int
+	)
+BEGIN
+	declare resultado TEXT;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+		BEGIN
+			SET resultado = '{
+				"estado": "401",
+				"mensaje":"Error al buscar el nacimiento"
+				}
+				';
+		END;
+        
+        START TRANSACTION;
+        IF (idnacimiento is not null)THEN
+				SELECT a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
+				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				where idnacimiento=a.idnacimiento and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento ;
+
+               
+			ELSE
+				SELECT a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
+				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				where a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
+			END IF;
+END;
+
+
+
+-- PROCEDIMIENTO PARA CONSULTAR DPIs
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: obtiene los datos de un nacimiento
+-- ===========================================================================
+
+DELIMITER $$
+CREATE PROCEDURE obtenerDPI (
+		in noDpi int
+	)
+BEGIN
+	declare resultado TEXT;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+		BEGIN
+			SET resultado = '{
+				"estado": "401",
+				"mensaje":"Error al buscar el nacimiento"
+				}
+				';
+		END;
+        
+        START TRANSACTION;
+        IF (noDpi is not null)THEN
+				SELECT noDpi, a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento                
+				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				where noDpi=d.noDpi and d.idnacimiento=a.idNacimiento and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
+			ELSE
+				SELECT noDpi, a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
+				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				where noDpi=d.noDpi and d.idnacimiento=a.idNacimiento  and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
+			END IF;
+END;
+
+
+
+
+-- PROCEDIMIENTO PARA CONSULTAR DEFUNCIONES
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: obtiene los datos de una defuncion
+-- ===========================================================================
+
+DELIMITER $$
+CREATE PROCEDURE obtenerDefuncion (
+		in noDpi int
+	)
+BEGIN
+	declare resultado TEXT;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+		BEGIN
+			SET resultado = '{
+				"estado": "401",
+				"mensaje":"Error al buscar la defuncion"
+				}
+				';
+		END;
+        
+        START TRANSACTION;
+        IF (noDpi is not null)THEN
+				SELECT  a.iddefuncion,a.fecha , a.noDpi, c.nombre, c.apellidos           
+				FROM defuncion a, dpi b, nacimiento c
+				where  noDpi=a.noDpi and b.noDpi=a.noDpi and b.idnacimiento=c.idnacimiento;
+			ELSE
+				SELECT a.iddefuncion, a.fecha , a.noDpi, c.nombre, c.apellidos           
+				FROM defuncion a, dpi b, nacimiento c
+				where  b.noDpi=a.noDpi and b.idnacimiento=c.idnacimiento;
+			END IF;
+END;
+
+
+-- PROCEDIMIENTO PARA CONSULTAR LICENCIAS
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: obtiene los datos de una licencia
+-- ===========================================================================
+
+DELIMITER $$
+CREATE PROCEDURE obtenerLicencia (
+		in noDpi int
+	)
+BEGIN
+	declare resultado TEXT;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+		BEGIN
+			SET resultado = '{
+				"estado": "401",
+				"mensaje":"Error al buscar la licencia"
+				}
+				';
+		END;
+        
+        START TRANSACTION;
+        IF (noDpi is not null)THEN
+				SELECT   c.nombre,c.apellidos, a.tipo, a.anosAntiguedad         
+				FROM licencia as a, dpi as b, nacimiento as c
+				where  noDpi=a.noDpi and a.noDpi=b.noDpi and b.idnacimiento=c.idnacimiento;
+			ELSE
+				SELECT   c.nombre,c.apellidos, a.tipo, a.anosAntiguedad         
+				FROM licencia as a, dpi as b, nacimiento as c
+				where  a.noDpi=b.noDpi and b.idnacimiento=c.idnacimiento;
+			END IF;
+END;
+
+
+-- PROCEDIMIENTO PARA CONSULTAR MATRIMONIOS
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: obtiene los datos de una defuncion
+-- ===========================================================================
+
+DELIMITER $$
+CREATE PROCEDURE obtenerMatrimonio (
+		in noDpi int
+	)
+BEGIN
+	declare resultado TEXT;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+		BEGIN
+			SET resultado = '{
+				"estado": "401",
+				"mensaje":"Error al buscar la defuncion"
+				}
+				';
+		END;
+        
+        START TRANSACTION;
+        IF (noDpi is not null)THEN
+				SELECT  a.idmatrimonio,a.fecha , a.noDpiHombre, c.nombre ,a.noDpiMujer, c.nombre       
+				FROM matrimonio a, dpi b, nacimiento c
+				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) and
+                a.noDpiHombre=b.noDpi and b.idnacimiento=c.idnacimiento and
+                a.noDpiMujer=b.noDpi and b.idnacimiento=c.idnacimiento;
+			ELSE
+				SELECT  a.idmatrimonio,a.fecha , a.noDpiHombre, c.nombre ,a.noDpiMujer, c.nombre       
+				FROM matrimonio a, dpi b, nacimiento c
+				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) and
+                a.noDpiHombre=b.noDpi and b.idnacimiento=c.idnacimiento and
+                a.noDpiMujer=b.noDpi and b.idnacimiento=c.idnacimiento;
+			END IF;
+END;
