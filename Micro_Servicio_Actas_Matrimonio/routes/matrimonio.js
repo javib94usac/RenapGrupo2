@@ -20,12 +20,12 @@ router.post("/", function(req, res, next) {
       if (comprobar.get_dpi_validos()){
           datos.resultado = "Datos a procesar correctos";
           var parametros ={
-              url: "http://localhost:9006/setMatrimonio",
+              url: "http://Almacenamiento:9006/setMatrimonio",
               tipo: 'POST',
               parametros: datos
 
           };
-          let uri="http://localhost:10000/enrutar";
+          let uri="http://ServiceBus:10000/enrutar";
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");

@@ -67,12 +67,13 @@ pipeline {
                 sh 'echo Actualizando el servidor...'
                 sh 'su javib94'
                 sh 'cd /home/javib94/app/RenapGrupo2'
+                sh 'docker-compose down'
                 //sh 'sudo sed -i \'s+https://github.com+ssh://git@github.com+g\' .git/config'
                 //sh 'eval $(ssh-agent -s)'
                 //sh 'echo $SSH_AUTH_SOCK'
                 //sh 'ssh-add /home/javib94/.ssh/javib94'
                 sh 'git checkout cicd'
-                sh 'git pull'
+                sh 'git pull origin cicd'
                 sh 'cd Micro_Servicio_Actas_Nacimiento'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
                 sh 'cd ..'
@@ -85,7 +86,17 @@ pipeline {
                 sh 'cd Micro_Servicio_Actas_Defuncion'
                 sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
                 sh 'cd ..'
-                sh 'docker-compose down'
+                sh 'cd Micro_Servicio_Almacenamiento'
+                sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
+                sh 'cd ..'
+                sh 'cd Micro_Servicio_ESB'
+                sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
+                sh 'cd ..'
+                // inicio agregando micro servicio de cliente interno
+                sh 'cd Micro_Servicio_Cliente_Interno'
+                sh 'docker run -v "$PWD":/usr/src/app -w /usr/src/app node:13.3.0 npm install'
+                // fin 
+                sh 'cd ..'
                 sh 'docker-compose up -d'
             }
         }

@@ -29,11 +29,11 @@ router.get('/', function(req, res, next) {
 
                 var parametros=
               {
-                url:"http://localhost:9006/setActualizar", //localhost:3001/verdatos
+                url:"http://Almacenamiento:9006/setActualizar", //localhost:3001/verdatos
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
-              let uri="http://localhost:10000/enrutar";
+              let uri="http://ServiceBus:10000/enrutar";
               axios.post(uri,parametros) // el json datos
               .then(function (response) {
                   console.log("Todo correcto en el request POST");
