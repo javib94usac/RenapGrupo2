@@ -111,12 +111,18 @@ app.post('/setMatrimonio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setMatriminio");
     console.log(parametos);
-    var respuesta=
-    {
-      estado:"ok",
-      mensaje:"llego a set matrimonio"
-    };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call insertarMatrimonio(\''+parametos.fecha+'\','+parametos.dpih+','+parametos.dpim+','+1+');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });  
 });
 /***
  *  getdefuncion
@@ -153,12 +159,24 @@ app.post('/setDefuncion',async(req,res)=>
     var parametos=req.body.params;
     console.log("entra en setDefuncion");
     console.log(parametos);
-    var respuesta=
+    /*var respuesta=
     {
       estado:"ok",
       mensaje:"llego a set defuncion"
     };
-    res.end(JSON.stringify(respuesta));  
+    res.end(JSON.stringify(respuesta));  */
+    connection.query('call insertarDefuncion(\''+parametos.fecha+'\','+parametos.dpi+');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
     
 });
 /**
