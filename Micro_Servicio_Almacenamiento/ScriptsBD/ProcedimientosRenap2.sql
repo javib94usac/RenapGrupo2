@@ -1,4 +1,5 @@
-use test;
+use renapgrupo2;
+
 
 -- PROCEDIMIENTO PARA REGISTRAR NACIMIENTOS
 -- ===========================================================================
@@ -10,11 +11,11 @@ DELIMITER $$
 create procedure insertarNacimiento(
 in apellidos varchar(255),
 in nombre varchar(255),
-in dpiPadre int,
-in dpiMadre int,
+in dpiPadre bigint,
+in dpiMadre bigint,
 in fechaNacimiento varchar(200),
 in genero varchar(1),
-in idMunicipio int
+in idMunicipio bigint
 )
 begin
 declare resultado text;
@@ -47,8 +48,8 @@ END;
 
 DELIMITER $$
 create procedure insertarDpi(
-in noDpi int,
-in idNacimiento int,
+in noDpi bigint,
+in idNacimiento bigint,
 in contrasena varchar(45)
 )
 begin
@@ -84,7 +85,7 @@ END;
 DELIMITER $$
 create procedure insertarDefuncion(
 in fecha varchar(200),
-in noDpi int
+in noDpi bigint
 )
 begin
 declare resultado text;
@@ -100,7 +101,7 @@ declare resultado text;
 	end;
     -- sin errores
     start transaction;
-    insert into defuncion(fecha,noDpi) values(fecha,noDpi);
+    insert into Defuncion(fecha,noDpi) values(fecha,noDpi);
     set resultado= '{
 						"estado": "200",
                         "mensaje": "inserto bien"
@@ -117,9 +118,9 @@ END;
 
 DELIMITER $$
 create procedure insertarLicencia(
-in anosAntiguedad int,
+in anosAntiguedad bigint,
 in tipo varchar(1),
-in noDpi int
+in noDpi bigint
 )
 begin
 declare resultado text;
@@ -135,7 +136,7 @@ declare resultado text;
 	end;
     -- sin errores
     start transaction;
-    insert into licencia(anosAntiguedad,tipo,noDpi) values(anosAntiguedad,tipo,noDpi);
+    insert into Licencia(anosAntiguedad,tipo,noDpi) values(anosAntiguedad,tipo,noDpi);
     set resultado= '{
 						"estado": "200",
                         "mensaje": "inserto bien"
@@ -154,8 +155,8 @@ END;
 DELIMITER $$
 create procedure insertarMatrimonio(
 in fecha varchar(200),
-in noDpiHombre int,
-in noDpiMujer int,
+in noDpiHombre bigint,
+in noDpiMujer bigint,
 in vigente tinyint
 )
 begin
@@ -172,7 +173,7 @@ declare resultado text;
 	end;
     -- sin errores
     start transaction;
-    insert into matrimonio(fecha,noDpiHombre,noDpiMujer,Vigente) values(fecha,noDpiHombre,noDpiMujer,vigente);
+    insert into Matrimonio(fecha,noDpiHombre,noDpiMujer,Vigente) values(fecha,noDpiHombre,noDpiMujer,vigente);
     set resultado= '{
 						"estado": "200",
                         "mensaje": "inserto bien"
@@ -192,7 +193,7 @@ END;
 DELIMITER $$
 create procedure insertarDivorcio(
 in fecha varchar(200),
-in idMatrimonio int
+in idMatrimonio bigint
 )
 begin
 declare resultado text;
@@ -208,7 +209,7 @@ declare resultado text;
 	end;
     -- sin errores
     start transaction;
-    insert into divorcio(fecha,idMatrimonio) values(fecha,idMatrimonio);
+    insert into Divorcio(fecha,idMatrimonio) values(fecha,idMatrimonio);
     set resultado= '{
 						"estado": "200",
                         "mensaje": "inserto bien"
@@ -226,7 +227,7 @@ END;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerNacimiento (
-		in idnacimiento int
+		in idnacimiento bigint
 	)
 BEGIN
 	declare resultado TEXT;
@@ -241,14 +242,14 @@ BEGIN
         
         START TRANSACTION;
         IF (idnacimiento is not null)THEN
-				SELECT a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
-				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				SELECT a.idNacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
+				FROM Nacimiento as a, Municipio as b, Departamento as c, DPI as d
 				where idnacimiento=a.idnacimiento and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento ;
 
                
 			ELSE
 				SELECT a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
-				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				FROM Nacimiento as a, Municipio as b, Departamento as c, DPI as d
 				where a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
 			END IF;
 END;
@@ -263,7 +264,7 @@ END;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerDPI (
-		in noDpi int
+		in noDpi bigint
 	)
 BEGIN
 	declare resultado TEXT;
@@ -279,11 +280,11 @@ BEGIN
         START TRANSACTION;
         IF (noDpi is not null)THEN
 				SELECT noDpi, a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento                
-				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				FROM Nacimiento as a, Municipio as b, Departamento as c, DPI as d
 				where noDpi=d.noDpi and d.idnacimiento=a.idNacimiento and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
 			ELSE
 				SELECT noDpi, a.idnacimiento , a.nombre, a.apellidos,a.genero, a.fechaNacimiento , b.nombreMunicipio, c.nombreDepartamento
-				FROM nacimiento as a, municipio as b, departamento as c, dpi as d
+				FROM Nacimiento as a, Municipio as b, Departamento as c, DPI as d
 				where noDpi=d.noDpi and d.idnacimiento=a.idNacimiento  and a.idmunicipio= b.idMunicipio AND b.idDepartamento=c.idDepartamento;
 			END IF;
 END;
@@ -299,7 +300,7 @@ END;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerDefuncion (
-		in noDpi int
+		in noDpi bigint
 	)
 BEGIN
 	declare resultado TEXT;
@@ -315,11 +316,11 @@ BEGIN
         START TRANSACTION;
         IF (noDpi is not null)THEN
 				SELECT  a.iddefuncion,a.fecha , a.noDpi, c.nombre, c.apellidos           
-				FROM defuncion a, dpi b, nacimiento c
+				FROM Defuncion a, DPI b, Nacimiento c
 				where  noDpi=a.noDpi and b.noDpi=a.noDpi and b.idnacimiento=c.idnacimiento;
 			ELSE
 				SELECT a.iddefuncion, a.fecha , a.noDpi, c.nombre, c.apellidos           
-				FROM defuncion a, dpi b, nacimiento c
+				FROM Defuncion a, DPI b, Nacimiento c
 				where  b.noDpi=a.noDpi and b.idnacimiento=c.idnacimiento;
 			END IF;
 END;
@@ -333,7 +334,7 @@ END;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerLicencia (
-		in noDpi int
+		in noDpi bigint
 	)
 BEGIN
 	declare resultado TEXT;
@@ -349,11 +350,11 @@ BEGIN
         START TRANSACTION;
         IF (noDpi is not null)THEN
 				SELECT   c.nombre,c.apellidos, a.tipo, a.anosAntiguedad         
-				FROM licencia as a, dpi as b, nacimiento as c
+				FROM Licencia as a, DPI as b, Nacimiento as c
 				where  noDpi=a.noDpi and a.noDpi=b.noDpi and b.idnacimiento=c.idnacimiento;
 			ELSE
 				SELECT   c.nombre,c.apellidos, a.tipo, a.anosAntiguedad         
-				FROM licencia as a, dpi as b, nacimiento as c
+				FROM Licencia as a, DPI as b, Nacimiento as c
 				where  a.noDpi=b.noDpi and b.idnacimiento=c.idnacimiento;
 			END IF;
 END;
@@ -367,7 +368,7 @@ END;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerMatrimonio (
-		in noDpi int
+		in noDpi bigint
 	)
 BEGIN
 	declare resultado TEXT;
@@ -383,15 +384,11 @@ BEGIN
         START TRANSACTION;
         IF (noDpi is not null)THEN
 				SELECT  a.idmatrimonio,a.fecha , a.noDpiHombre, c.nombre ,a.noDpiMujer, c.nombre       
-				FROM matrimonio a, dpi b, nacimiento c
-				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) and
-                a.noDpiHombre=b.noDpi and b.idnacimiento=c.idnacimiento and
-                a.noDpiMujer=b.noDpi and b.idnacimiento=c.idnacimiento;
+				FROM Matrimonio a, DPI b, Nacimiento c
+				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) ;
 			ELSE
 				SELECT  a.idmatrimonio,a.fecha , a.noDpiHombre, c.nombre ,a.noDpiMujer, c.nombre       
-				FROM matrimonio a, dpi b, nacimiento c
-				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) and
-                a.noDpiHombre=b.noDpi and b.idnacimiento=c.idnacimiento and
-                a.noDpiMujer=b.noDpi and b.idnacimiento=c.idnacimiento;
+				FROM Matrimonio a, DPI b, Nacimiento c
+				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) ;
 			END IF;
 END;

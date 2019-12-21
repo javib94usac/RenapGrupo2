@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 const connection = mysql.createConnection({
     host: '35.226.255.150', // ip de la base datos
     user: 'root',
-    password: '##ContraseñaDificil123',
+    password:'##ContraseñaDificil123',
     database: 'renapgrupo2'
   })
 connection.connect(); // siempre hay que dajar la conexion abierta! 
 app.get('/',function(req,res){
     
-    /** 
+    /** s
      *  ejemplo de como usar la base datos y regesar la info desde el res.send
      */
    connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
@@ -46,14 +46,26 @@ app.post('/setNacimiento',async(req,res)=>
 {
     var parametos=req.body.params;
     console.log("enta en setNacimientos");
-
     console.log(parametos);
-    var respuesta=
+   /* var respuesta=
     {
       estado:"ok",
       mensaje:"llego a set nacimineto set nacimento"
     };
-    res.end(JSON.stringify(respuesta));  
+    res.end(JSON.stringify(respuesta));*/
+    //call insertarNacimiento('alguien mas','nombre',1564654444,15454546,'06-12-1993','M',4545);  
+    connection.query('call insertarNacimiento(\''+parametos.apellidos+'\',\''+parametos.nombres+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\'06-12-1993\',\'M\',4545);', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
 });
 /**
  *  get Matrimonio
@@ -69,12 +81,20 @@ app.post('/getNacimiento',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en getNacimientos");
     console.log(parametos);
-    var respuesta=
+   /* var respuesta=
     {
       estado:"ok",
       mensaje:"llego a get nacimineto"
-    };
-    res.end(JSON.stringify(respuesta));  
+    };*/
+    connection.query('call obtenerNacimiento('+parametos.dpi+');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].nombre);
+      //console.log('The solution is: ', rows[0].solution);
+      res.send('consulta de obtener acta de nacimiento');
+    });
+    //res.end(JSON.stringify(respuesta));  
 });
 /* servicios matrimonio
     crear una nueva acta de defunción
@@ -139,6 +159,7 @@ app.post('/setDefuncion',async(req,res)=>
       mensaje:"llego a set defuncion"
     };
     res.end(JSON.stringify(respuesta));  
+    
 });
 /**
  * get Defuncion
@@ -265,13 +286,24 @@ app.post('/setDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set DPI");
     console.log(parametos);
-    
-    var respuesta=
+   /* var respuesta=
     {
       estado:"ok",
       mensaje:"el numero de dpi es"
     };
-    res.end(JSON.stringify(respuesta));  
+    res.end(JSON.stringify(respuesta));  */
+    connection.query('call insertarDpi('+parametos.apellidos+','+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
 });
 /**getDPI
  *      se devulve la informacion del dpi enviado
@@ -308,14 +340,25 @@ app.post('/setLicencia',async(req,res)=>
 {
     var parametos=req.body.params;
     console.log("enta  set licencia");
-    console.log(parametos);
-    
-    var respuesta=
+    console.log(parametos);  
+   /* var respuesta=
     {
       estado:"ok",
       mensaje:"entro en set licencia"
     };
-    res.end(JSON.stringify(respuesta));  
+    res.end(JSON.stringify(respuesta));  */
+    connection.query('call insertarLicencia(0,\''+parametos.tipo+'\','+parametos.dpi+');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
 });
 /**setActualizar
  * metodo para actializar licencia solo B o A
