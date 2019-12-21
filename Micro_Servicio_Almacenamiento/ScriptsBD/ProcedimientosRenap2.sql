@@ -166,7 +166,7 @@ declare resultado text;
     begin
 		set resultado='{
 						"estado": "401",
-                        "mensaje": "error al insertar defuncion"
+                        "mensaje": "error al insertar el matrimonio"
                         }
                         ';
 		select resultado;
@@ -176,7 +176,7 @@ declare resultado text;
     insert into Matrimonio(fecha,noDpiHombre,noDpiMujer,Vigente) values(fecha,noDpiHombre,noDpiMujer,vigente);
     set resultado= '{
 						"estado": "200",
-                        "mensaje": "inserto bien"
+                        "mensaje": "inserto bien el matrimonio"
                         }
                         ';
 		select resultado;
@@ -193,7 +193,8 @@ END;
 DELIMITER $$
 create procedure insertarDivorcio(
 in fecha varchar(200),
-in idMatrimonio bigint
+in dpiH bigint,
+in dpiM bigint
 )
 begin
 declare resultado text;
@@ -209,10 +210,12 @@ declare resultado text;
 	end;
     -- sin errores
     start transaction;
-    insert into Divorcio(fecha,idMatrimonio) values(fecha,idMatrimonio);
+    insert into Divorcio(fecha,idMatrimonio) 
+    select idMatrimonio from Matrimonio as M
+    where 2338005140101=M.noDpiHombre and 2338005140102=M.noDpiMujer;
     set resultado= '{
 						"estado": "200",
-                        "mensaje": "inserto bien"
+                        "mensaje": "inserto bien el divorcio :v"
                         }
                         ';
 		select resultado;
@@ -391,4 +394,79 @@ BEGIN
 				FROM Matrimonio a, DPI b, Nacimiento c
 				where  (noDpi=a.noDpiHombre or noDpi=a.noDpiMujer) ;
 			END IF;
+END;
+
+
+
+
+
+-- PROCEDIMIENTO PARA GENERAR NUEVAS CLAVES
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: inserta y modifica las claves de usuario
+-- ===========================================================================
+DELIMITER $$
+create procedure insertarClave(
+in dpi bigint,
+in clave varchar(45)
+)
+begin
+declare resultado text;
+    -- excepcion para error
+    declare exit handler for sqlexception
+    begin
+		set resultado='{
+						"estado": "401",
+                        "mensaje": "error al modificar clave"
+                        }
+                        ';
+		select resultado;
+	end;
+    -- sin errores
+    start transaction;
+    update DPI set Contrasena=clave where dpi=noDpi;
+    
+    set resultado= '{
+						"estado": "200",
+                        "mensaje": "actualizo la clave correctamente"
+                        }
+                        ';
+		select resultado;
+END;
+
+
+
+
+-- PROCEDIMIENTO PARA ACTUALIZAR LOS TIPOS DE LICENCIAS
+-- ===========================================================================
+-- JOSSIE CASTRILLO
+-- DESCRIPCION: inserta y modifica los tipos de licencias
+-- ===========================================================================
+DELIMITER $$
+create procedure actualizarTipoLicencia(
+in dpi bigint,
+in tipo varchar(1)
+)
+begin
+declare resultado text;
+    -- excepcion para error
+    declare exit handler for sqlexception
+    begin
+		set resultado='{
+						"estado": "401",
+                        "mensaje": "error al modificar el tipo de licencia"
+                        }
+                        ';
+		select resultado;
+	end;
+    -- sin errores
+    start transaction;
+     update Licencia set tipo=tipo where dpi=noDpi;
+    
+    set resultado= '{
+						"estado": "200",
+                        "mensaje": "actualizo la licencia correctamente"
+                        }
+                        ';
+		select resultado;
 END;

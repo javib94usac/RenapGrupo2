@@ -54,7 +54,7 @@ app.post('/setNacimiento',async(req,res)=>
     };
     res.end(JSON.stringify(respuesta));*/
     //call insertarNacimiento('alguien mas','nombre',1564654444,15454546,'06-12-1993','M',4545);  
-    connection.query('call insertarNacimiento(\''+parametos.apellidos+'\',\''+parametos.nombres+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\'06-12-1993\',\'M\',4545);', function(err, rows, fields) {
+    connection.query('call insertarNacimiento(\''+parametos.apellidos+'\',\''+parametos.nombres+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\',4545);', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
       var algo2=algo[0];
@@ -217,12 +217,18 @@ app.post('/setDivorcio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setDivorcio");
     console.log(parametos);
-    var respuesta=
-    {
-      estado:"ok",
-      mensaje:"llego a set divorcio"
-    };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call insertarDivorcio(\''+parametos.fecha+'\','+parametos.dpiEsposo+','+parametos.dpiEsposa+');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
 });
 /**
  *  get divorcio
@@ -262,12 +268,18 @@ app.post('/setNuevaContraseña',async(req,res)=>
     console.log("enta set nueva contraseña");
     console.log(parametos);
     var clave=generatePassword(); // genero la nueva clave
-    var respuesta=
-    {
-      estado:"ok",
-      mensaje:""+clave
-    };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call insertarClave('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    });
 });
 /** getLogin
  *      la usamos para saber si el usuario exist
@@ -392,13 +404,18 @@ app.post('/setActualizar',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set actualizar");
     console.log(parametos);
-    
-    var respuesta=
-    {
-      estado:"ok",
-      mensaje:"entro en set actualizar"
-    };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call actualizarTipoLicencia('+parametos.dpi+',\''+parametos.tipo+'\');', function(err, rows, fields) {
+      if (err) throw err;
+      var algo= rows[0];  //JSON.stringify(rows[0])
+      var algo2=algo[0];
+      console.log(algo[0].resultado);
+      //console.log('The solution is: ', rows[0].solution);
+      var respuesta=algo[0].resultado;
+      console.log(respuesta);
+      console.log(JSON.parse(respuesta));
+      respuesta=JSON.parse(respuesta);
+    res.end(JSON.stringify(respuesta));
+    }); 
 });
 /**
  * meto de inicio donde corre el puerto
