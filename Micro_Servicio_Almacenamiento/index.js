@@ -273,7 +273,8 @@ app.post('/setNuevaContraseña',async(req,res)=>
       estado:"ok",
       mensaje:"la nueva clave generada es "+clave
     
-    }
+    };
+    res.end(JSON.stringify(respuesta));
     /*connection.query('call insertarClave('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
