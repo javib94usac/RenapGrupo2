@@ -268,7 +268,13 @@ app.post('/setNuevaContraseña',async(req,res)=>
     console.log("enta set nueva contraseña");
     console.log(parametos);
     var clave=generatePassword(); // genero la nueva clave
-    connection.query('call insertarClave('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
+    respuesta=
+    {
+      estado:"ok",
+      mensaje:"la nueva clave generada es "+clave
+    
+    }
+    /*connection.query('call insertarClave('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
       var algo2=algo[0];
@@ -278,8 +284,8 @@ app.post('/setNuevaContraseña',async(req,res)=>
       console.log(respuesta);
       console.log(JSON.parse(respuesta));
       respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
-    });
+      res.end(JSON.stringify(respuesta));
+    });*/
 });
 /** getLogin
  *      la usamos para saber si el usuario exist
@@ -316,13 +322,13 @@ app.post('/setDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set DPI");
     console.log(parametos);
-   /* var respuesta=
+    var respuesta=
     {
       estado:"ok",
-      mensaje:"el numero de dpi es"
+      mensaje:"el numero de dpi es 0123456789"
     };
-    res.end(JSON.stringify(respuesta));  */
-    connection.query('call insertarDpi('+parametos.apellidos+','+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
+    res.end(JSON.stringify(respuesta));  
+    /*connection.query('call insertarDpi('+parametos.apellidos+','+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
       var algo2=algo[0];
@@ -333,7 +339,7 @@ app.post('/setDPI',async(req,res)=>
       console.log(JSON.parse(respuesta));
       respuesta=JSON.parse(respuesta);
     res.end(JSON.stringify(respuesta));
-    });
+    });*/
 });
 /**getDPI
  *      se devulve la informacion del dpi enviado
