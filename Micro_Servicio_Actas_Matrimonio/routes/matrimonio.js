@@ -14,7 +14,7 @@ router.post("/", function(req, res, next) {
     resultado: "Acta en proceso"
   };
   console.log(datos);
-   var comprobar = new compro(datos.dpih,datos.dpim,datos.fecha);
+   var comprobar = new compro(datos.dpiHombre,datos.dpiMujer,datos.fecha);
    if (comprobar.get_vacio()){
 
       if (comprobar.get_dpi_validos()){
