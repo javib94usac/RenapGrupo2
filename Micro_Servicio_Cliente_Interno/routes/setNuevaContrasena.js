@@ -72,7 +72,7 @@ router.get('/', function(req, res, next) {
                   console.log("Error en el request POST");
                   console.log(error);
                   //res.end(JSON.stringify(error));
-                  datos.resultado="error al conrectar esb";
+                  datos.resultado="error al conrectar esb "+req.body.esb;
                   res.render('setNuevaContrasena',{datos});
               })
               .then(function () {
