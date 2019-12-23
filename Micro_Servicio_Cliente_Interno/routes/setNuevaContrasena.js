@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
-              let uri=req.body.esb;
+              let uri=req.query.esb;
               axios.post(uri,parametros) // el json datos
               .then(function (response) {
                   console.log("Todo correcto en el request POST");
@@ -72,7 +72,7 @@ router.get('/', function(req, res, next) {
                   console.log("Error en el request POST");
                   console.log(error);
                   //res.end(JSON.stringify(error));
-                  datos.resultado="error al conrectar esb "+req.body.esb;
+                  datos.resultado="error al conectar esb "+req.query.esb;
                   res.render('setNuevaContrasena',{datos});
               })
               .then(function () {
