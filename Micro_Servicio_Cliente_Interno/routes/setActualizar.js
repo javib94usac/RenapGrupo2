@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
-              let uri=req.body.esb;
+              let uri=req.query.esb;
               axios.post(uri,parametros) // el json datos
               .then(function (response) {
                   console.log("Todo correcto en el request POST");
