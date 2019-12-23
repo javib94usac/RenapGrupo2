@@ -8,8 +8,8 @@ const axios = require('axios');
 /* Se extrae los datos de la vista para ejecutar el metodo post. */
 router.post("/", function(req, res, next) {
   datos = {
-    dpih: req.body.dpiHombre, //dpi  del hombre, futuro esposo
-    dpim: req.body.dpiMujer, // dpi de la mujer, futura esposa
+    dpiHombre: req.body.dpiHombre, //dpi  del hombre, futuro esposo
+    dpiMujer: req.body.dpiMujer, // dpi de la mujer, futura esposa
     fecha: req.body.fecha,    // fecha en la que se casaron
     resultado: "Acta en proceso"
   };
@@ -25,7 +25,7 @@ router.post("/", function(req, res, next) {
               parametros: datos
 
           };
-          let uri="http://ServiceBus:10000/enrutar";
+          let uri=req.body.esb;
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");

@@ -50,7 +50,7 @@ router.post('/', function(req, res, next) {
             parametros:datos //mis datos 
           }; 
           // uri es la url del esp ip:puerto post/comunicacion
-          let uri="http://ServiceBus:10000/enrutar";
+          let uri=req.body-esb;
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");

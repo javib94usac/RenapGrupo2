@@ -111,7 +111,7 @@ app.post('/setMatrimonio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setMatriminio");
     console.log(parametos);
-    connection.query('call insertarMatrimonio(\''+parametos.fecha+'\','+parametos.dpih+','+parametos.dpim+','+1+');', function(err, rows, fields) {
+    connection.query('call insertarMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+','+1+');', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
       var algo2=algo[0];

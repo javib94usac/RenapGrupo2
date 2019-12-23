@@ -3,8 +3,12 @@
 
 <form action="setDPI" method="get" >
   Numero Acta:<br>
-  <input type="text" name="acta" size=20><br> 
-  
+  <input type="text" name="acta" size=20>
+  <br>Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select> 
+  <br> 
   <input type="submit" value="Generar DPI">
    <h1 style="color:blue;">{{datos.resultado}}</h1>
 </form>

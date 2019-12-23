@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
  
- router.post("/enrutar",async(req,res)=>{
+/*oost/comunicacionesb */
+ router.post("/post/comunicacionesb",async(req,res)=>{
     console.log("si le pego al uri de comunicacion");
     /*
       Esto en maso manos lo que tendria que venir en el body
