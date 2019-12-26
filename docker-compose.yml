@@ -24,6 +24,18 @@ services:
         main:
           aliases:
             - ClienteInterno
+    ClienteExterno:
+      image: node:13.3.0
+      working_dir: /usr/app
+      command: npm start
+      volumes:
+        - ./Micro_Servicio_Cliente_Externo:/usr/app/
+      ports:
+        - "9005:9005"
+      networks:
+        main:
+          aliases:
+            - ClienteExterno
     Defuncion:
       image: node:13.3.0
       working_dir: /usr/app
