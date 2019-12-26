@@ -1,0 +1,75 @@
+<h1>
+    Lista de Opciones
+</h1>
+
+<form action="getNacimiento" method="post" >
+  <h2> Consultar acta nacimiento</h2> <br>
+  Numero Acta :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+  
+</form>
+<br>
+<form action="getMatrimonio" method="post" >
+  <h2>Consultar acta Matrimonio</h2> <br> 
+  Numero Acta :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+   
+</form>
+<br>
+<form action="getDefuncion" method="post" >
+  <h2>Consultar acta  Defuncion</h2><br>
+  Numero Acta :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+   
+</form>
+<br>
+<form action="getDivorcio" method="post" >
+  <h2>Consultar acta Divorcio</h2><br>
+  Numero Acta :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+  
+</form>
+<br>
+<form action="getDPI" method="post" >
+  <h2>Consultar DPI</h2><br>
+  Numero DPI :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="http://ServiceBus:10000/post/comunicacionesb">Grupo 2</option> 
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+  
+</form>
+<br>
+
+ <h1 style="color:blue;">{{datos.resultado}}</h1>
+ <br>
+ <a href="/">
+  <button >cerrar sesion</button>
+</a>

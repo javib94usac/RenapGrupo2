@@ -13,8 +13,7 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpi: req.body.dpi,
-      password: req.body.password,
+      acta: req.body.acta,
       resultado:"acta en proceso",
       
   };
@@ -26,19 +25,20 @@ router.post('/', function(req, res, next) {
         “parámetros”:{
              “parametro1”:”parametro1”,
              “parametro2”:”parametro2”
+              get_es_numero()
         }
       }*/
   console.log(datos); 
-  var comprobar= new compro(datos.dpi,datos.password);
+  var comprobar= new compro(datos.acta,"adfadf");
   if(comprobar.get_vacio())
   {
-    if (comprobar.get_dpi_validos())
+    if (comprobar.get_es_numero())
     {
         
           datos.resultado="datos de acta correcto";
           var parametros=
           {
-            url:"http://Almacenamiento:9006/getLogin", //localhost:3001/verdatos
+            url:"http://Almacenamiento:9006/getDPI", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
@@ -49,7 +49,7 @@ router.post('/', function(req, res, next) {
               console.log("Todo correcto en el request POST");
               //console.log(response.data);
               //res.end(response);
-              datos.resultado=response.data;
+              datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
              
 
@@ -63,15 +63,7 @@ router.post('/', function(req, res, next) {
               // always executed
               console.log("always executed");
               //res.end(JSON.stringify({mess:"always executed"}));
-              if(datos.resultado.estado=='ok')
-              {
-                res.render('menu');
-              }
-              else
-              {
-                datos.resultado=datos.resultado.mensaje;
-                res.render('index',{datos});
-              }
+              res.render('menu',{datos})
               
           });
         
@@ -80,15 +72,15 @@ router.post('/', function(req, res, next) {
     else 
     {
     
-      datos.resultado="el numero de dpi no es valido deben ser solo numero sin guiones o signos y de longitud 13";
-      res.render('index',{datos});
+      datos.resultado="el numero de acta no es valido";
+      res.render('menu',{datos});
     }
   }
   else 
   {
   
     datos.resultado="debe llenar todos los campos";
-    res.render('index',{datos});
+    res.render('menu',{datos});
   }
   
   

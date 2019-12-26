@@ -81,20 +81,13 @@ app.post('/getNacimiento',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en getNacimientos");
     console.log(parametos);
-   /* var respuesta=
+   var respuesta=
     {
       estado:"ok",
       mensaje:"llego a get nacimineto"
-    };*/
-    connection.query('call obtenerNacimiento('+parametos.dpi+');', function(err, rows, fields) {
-      if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].nombre);
-      //console.log('The solution is: ', rows[0].solution);
-      res.send('consulta de obtener acta de nacimiento');
-    });
-    //res.end(JSON.stringify(respuesta));  
+    };
+    
+    res.end(JSON.stringify(respuesta));  
 });
 /* servicios matrimonio
     crear una nueva acta de defunción
@@ -129,7 +122,7 @@ app.post('/setMatrimonio',async(req,res)=>
  *  regresa información del acta
  *  parametros
  * {
- *     dpi// numero
+ *     acta // numero
  *     resultado : devuelve ok o error si ok toda la informacion
  * }
  * */ 
@@ -306,7 +299,7 @@ app.post('/getLogin',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"get login"
+      mensaje:"error en el login "
     };
     res.end(JSON.stringify(respuesta));  
 });
