@@ -3,6 +3,9 @@ const router = express.Router();
 const axios = require('axios');
  
 /*oost/comunicacionesb */
+router.get("/",async(req,res)=>{
+    res.send("ESB arriba");
+})
  router.post("/post/comunicacionesb",async(req,res)=>{
     console.log("si le pego al uri de comunicacion");
     /*
