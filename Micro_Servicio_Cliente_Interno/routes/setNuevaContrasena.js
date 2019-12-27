@@ -26,14 +26,14 @@ router.get('/', function(req, res, next) {
             if(comprobar.get_dpi_validos())
             {
                 datos.resultado="todo correcto";
-
+                var ip=req.query.esb;
                 var parametros=
               {
-                url:"http://Almacenamiento:9006/setNuevaContraseña", //localhost:3001/verdatos
+                url:"http://"+ip+":9006/setNuevaContraseña", //localhost:3001/verdatos
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
-              let uri=req.query.esb;
+              let uri="http://"+ip+":10000/post/comunicacionesb";
               axios.post(uri,parametros) // el json datos
               .then(function (response) {
                   console.log("Todo correcto en el request POST");
