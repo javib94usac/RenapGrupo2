@@ -318,6 +318,7 @@ app.post('/setNuevaContraseña',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         var respuesta= r;
+        respuesta.mensaje+=" la nueva contraseñan es :"+clave
         res.end(JSON.stringify(respuesta));
     });
 });
@@ -413,7 +414,7 @@ app.post('/setLicencia',async(req,res)=>
     console.log("enta  set licencia");
     console.log(parametos);  
     //call setLicencia(1000002410102);
-    connection.query('call setLicencia('+parametos.dpi+');', function(err, rows, fields) {
+    connection.query('call setLicencia('+parametos.dpi+',\''+parametos.tipo+'\');', function(err, rows, fields) {
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
