@@ -91,20 +91,34 @@ app.post('/getNacimiento',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en getNacimientos");
     console.log(parametos);
+    var respuesta=
+    {
+      estado:"ok",
+      mensaje:"ddd"
+    };
     connection.query('call getNacimiento('+parametos.acta+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
       r=r[0];
-      r=JSON.stringify(r);
-      r=r.replace('@','');
-      console.log(r);
-      r=JSON.parse(r);
-      console.log(r);
-      r=r.resultadoB;
-      r=JSON.parse(r);
-      console.log(r);
-      var respuesta= r;
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente"
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta
+      }
+     
+      console.log(respuesta);
       res.end(JSON.stringify(respuesta));
     });
 });
