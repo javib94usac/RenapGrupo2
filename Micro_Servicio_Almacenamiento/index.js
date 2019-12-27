@@ -20,9 +20,16 @@ app.get('/',function(req,res){
     /** s
      *  ejemplo de como usar la base datos y regesar la info desde el res.send
      */
-   connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+   /*connection.query('call setNacimiento(\'abraham 6\',\'elias 6\',1000000310102,1000000410102,\'1993-12-06\',\'M\',10102);', function(err, rows, fields) {
         if (err) throw err;
-        console.log('The solution is: ', rows[0].solution);
+        console.log('The solution is: ', rows);
+        res.send('servico de almacenamiento arriba');
+      });*/
+      //connection.connect();
+      connection.query('select * from persona;', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows);
+        //connection.end();
         res.send('servico de almacenamiento arriba');
       });
    
@@ -53,18 +60,21 @@ app.post('/setNacimiento',async(req,res)=>
       mensaje:"llego a set nacimineto set nacimento"
     };
     res.end(JSON.stringify(respuesta));*/
-    //call insertarNacimiento('alguien mas','nombre',1564654444,15454546,'06-12-1993','M',4545);  
-    connection.query('call insertarNacimiento(\''+parametos.apellidos+'\',\''+parametos.nombres+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\',4545);', function(err, rows, fields) {
+    connection.query('call setNacimiento(\''+parametos.nombres+'\',\''+parametos.apellidos+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\','+parametos.municipio+');', function(err, rows, fields) {  
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });
 });
 /**
@@ -104,7 +114,7 @@ app.post('/setMatrimonio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setMatriminio");
     console.log(parametos);
-    connection.query('call insertarMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+','+1+');', function(err, rows, fields) {
+    connection.query('call setMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+');', function(err, rows, fields) {
       if (err) throw err;
       var algo= rows[0];  //JSON.stringify(rows[0])
       var algo2=algo[0];
