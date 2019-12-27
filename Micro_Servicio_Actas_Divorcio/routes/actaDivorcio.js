@@ -21,13 +21,15 @@ router.post('/', function(req, res, next) {
     if (comprobar.get_dpi_validos())
     {
         datos.resultado="datos de acta correcto";
+      var ip = req.body.esb; 
         var parametros=
           {
-            url:"http://Almacenamiento:9006/setDivorcio", //localhost:3001/verdatos
+            url:"http://"+ip+":9006/setDivorcio", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
-          let uri=req.body.esb;
+          let uri = "http://" + ip + ":10000/post/comunicacionesb"; 
+          
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");

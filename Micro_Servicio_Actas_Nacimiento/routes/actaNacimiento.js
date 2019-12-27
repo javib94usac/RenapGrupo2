@@ -43,15 +43,15 @@ router.post('/', function(req, res, next) {
         if(comprobar.get_nombre_valido())
         {
           datos.resultado="datos de acta correcto";
-          var ip=req.body.esb;
+          var ip=req.body.esb; // GENERAR LA VARIABLE DE LA IP, VERIFICAR SI ES POST O GET
           var parametros=
-          {
+          {     // EN EL HTTP SE COLOCA EL NOMBRE DE LA VARIABLE DECLARADA
             url:"http://"+ip+":9006/setNacimiento", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
           // uri es la url del esp ip:puerto post/comunicacion
-          let uri="http://"+ip+":10000/post/comunicacionesb";
+          let uri="http://"+ip+":10000/post/comunicacionesb"; // SE TOMA TODA ESTA LINEA COMPLETA EN CADA MICROSERVICIO
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");
