@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
             parametros:datos //mis datos 
           }; 
           // uri es la url del esp ip:puerto post/comunicacion
-          "http://"+ip+":10000/post/comunicacionesb"
+          var uri= "http://"+ip+":10000/post/comunicacionesb"
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");
