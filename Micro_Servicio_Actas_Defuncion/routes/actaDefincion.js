@@ -21,14 +21,15 @@ router.post('/', function(req, res, next) {
     {
        
           datos.resultado="datos de acta correcto"
-
+            var ip = req.body.esb;
             var parametros = {
-              url: "http://Almacenamiento:9006/setDefuncion",
+              url: "http://"+ip+":9006/setDefuncion",
               tipo: "POST",
               parametros : datos
               
             };
-            let uri = req.body.esb;
+            let uri = "http://" + ip + ":10000/post/comunicacionesb"; // SE TOMA TODA ESTA LINEA COMPLETA EN CADA MICROSERVICIO
+           
             axios.post(uri, parametros) // el json datos
               .then(function (response) {
                 console.log("Todo correcto en el request POST");

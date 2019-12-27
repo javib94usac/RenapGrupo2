@@ -18,14 +18,18 @@ router.post("/", function(req, res, next) {
    if (comprobar.get_vacio()){
 
       if (comprobar.get_dpi_validos()){
+
+          
           datos.resultado = "Datos a procesar correctos";
+          var ip = req.body.esb; // GENERAR LA VARIABLE DE LA IP, VERIFICAR SI ES POST O GET
           var parametros ={
-              url: "http://Almacenamiento:9006/setMatrimonio",
+              url: "http://"+ip+":9006/setMatrimonio",
               tipo: 'POST',
               parametros: datos
 
           };
-          let uri=req.body.esb;
+          let uri = "http://" + ip + ":10000/post/comunicacionesb"; // SE TOMA TODA ESTA LINEA COMPLETA EN CADA MICROSERVICIO
+          
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");
