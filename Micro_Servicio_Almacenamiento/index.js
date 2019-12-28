@@ -20,9 +20,16 @@ app.get('/',function(req,res){
     /** s
      *  ejemplo de como usar la base datos y regesar la info desde el res.send
      */
-   connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+   /*connection.query('call setNacimiento(\'abraham 6\',\'elias 6\',1000000310102,1000000410102,\'1993-12-06\',\'M\',10102);', function(err, rows, fields) {
         if (err) throw err;
-        console.log('The solution is: ', rows[0].solution);
+        console.log('The solution is: ', rows);
+        res.send('servico de almacenamiento arriba');
+      });*/
+      //connection.connect();
+      connection.query('select * from persona;', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows);
+        //connection.end();
         res.send('servico de almacenamiento arriba');
       });
    
@@ -53,18 +60,21 @@ app.post('/setNacimiento',async(req,res)=>
       mensaje:"llego a set nacimineto set nacimento"
     };
     res.end(JSON.stringify(respuesta));*/
-    //call insertarNacimiento('alguien mas','nombre',1564654444,15454546,'06-12-1993','M',4545);  
-    connection.query('call insertarNacimiento(\''+parametos.apellidos+'\',\''+parametos.nombres+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\',4545);', function(err, rows, fields) {
+    connection.query('call setNacimiento(\''+parametos.nombres+'\',\''+parametos.apellidos+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\','+parametos.municipio+');', function(err, rows, fields) {  
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });
 });
 /**
@@ -81,13 +91,36 @@ app.post('/getNacimiento',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en getNacimientos");
     console.log(parametos);
-   var respuesta=
+    var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get nacimineto"
+      mensaje:"ddd"
     };
-    
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getNacimiento('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente"
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    });
 });
 /* servicios matrimonio
     crear una nueva acta de defunción
@@ -104,17 +137,22 @@ app.post('/setMatrimonio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setMatriminio");
     console.log(parametos);
-    connection.query('call insertarMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+','+1+');', function(err, rows, fields) {
+    //call setMatrimonio("2019-12-26",1000002210102,1000002310102);
+    connection.query('call setMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+');', function(err, rows, fields) {
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });  
 });
 /***
@@ -134,9 +172,33 @@ app.post('/getMatrimonio',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get matrimonio"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getMatrimonio('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente matrimonio";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /* defuncions procedimientos
 *   crear una nueva acta de defunción
@@ -152,23 +214,22 @@ app.post('/setDefuncion',async(req,res)=>
     var parametos=req.body.params;
     console.log("entra en setDefuncion");
     console.log(parametos);
-    /*var respuesta=
-    {
-      estado:"ok",
-      mensaje:"llego a set defuncion"
-    };
-    res.end(JSON.stringify(respuesta));  */
-    connection.query('call insertarDefuncion(\''+parametos.fecha+'\','+parametos.dpi+');', function(err, rows, fields) {
+    //call setDefuncion(1000002410102,"2019-12-26");
+    connection.query('call setDefuncion('+parametos.dpi+',\''+parametos.fecha+'\');', function(err, rows, fields) {
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });
     
 });
@@ -189,9 +250,33 @@ app.post('/getDefuncion',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get defuncion"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDefuncion('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente defuncion";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 
 /*
@@ -210,17 +295,22 @@ app.post('/setDivorcio',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en setDivorcio");
     console.log(parametos);
-    connection.query('call insertarDivorcio(\''+parametos.fecha+'\','+parametos.dpiEsposo+','+parametos.dpiEsposa+');', function(err, rows, fields) {
+    //call setDivorcio("2019-12-27",1000002210102,1000002310102);
+    connection.query('call setDivorcio(\''+parametos.fecha+'\','+parametos.dpiEsposo+','+parametos.dpiEsposa+');', function(err, rows, fields) {
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });
 });
 /**
@@ -240,9 +330,33 @@ app.post('/getDivorcio',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get divorcio"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDivorcio('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente del divorcio";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    });
 });
 /*
     setNuevaContraseña
@@ -261,25 +375,24 @@ app.post('/setNuevaContraseña',async(req,res)=>
     console.log("enta set nueva contraseña");
     console.log(parametos);
     var clave=generatePassword(); // genero la nueva clave
-    respuesta=
-    {
-      estado:"ok",
-      mensaje:"la nueva clave generada es "+clave
-    
-    };
-    res.end(JSON.stringify(respuesta));
-    /*connection.query('call insertarClave('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
-      if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-      res.end(JSON.stringify(respuesta));
-    });*/
+    //call setNuevaContrasena(1000002310102,"avengers");
+    connection.query('call setNuevaContrasena('+parametos.dpi+',\''+clave+'\');', function(err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        var r=rows[0];
+        r=r[0];
+        r=JSON.stringify(r);
+        r=r.replace('@','');
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        r=r.resultadoB;
+        r=JSON.parse(r);
+        console.log(r);
+        var respuesta= r;
+        respuesta.mensaje+=" la nueva contraseñan es :"+clave
+        res.end(JSON.stringify(respuesta));
+    });
 });
 /** getLogin
  *      la usamos para saber si el usuario exist
@@ -295,13 +408,36 @@ app.post('/getLogin',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  getLogin");
     console.log(parametos);
-    
     var respuesta=
     {
       estado:"ok",
-      mensaje:"error en el login "
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getLogin('+parametos.dpi+',\''+parametos.password+'\');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" informaccion de acceso erronea ";
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /* set dpi 
         se utiliza para generar un nuevo numero de dpi
@@ -316,24 +452,25 @@ app.post('/setDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set DPI");
     console.log(parametos);
-    var respuesta=
-    {
-      estado:"ok",
-      mensaje:"el numero de dpi es 0123456789"
-    };
-    res.end(JSON.stringify(respuesta));  
-    /*connection.query('call insertarDpi('+parametos.apellidos+','+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
-      if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
-    });*/
+    //call setDpi(1000002610102,10000018,'dfg');
+    var dp=parametos.numeroacta+""+10102;
+    console.log(dp);
+    connection.query('call setDpi('+dp+','+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        var r=rows[0];
+        r=r[0];
+        r=JSON.stringify(r);
+        r=r.replace('@','');
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        r=r.resultadoB;
+        r=JSON.parse(r);
+        console.log(r);
+        var respuesta= r;
+        res.end(JSON.stringify(respuesta));
+    });
 });
 /**getDPI
  *      se devulve la informacion del dpi enviado
@@ -349,13 +486,36 @@ app.post('/getDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  get DPI");
     console.log(parametos);
-    
     var respuesta=
     {
       estado:"ok",
-      mensaje:"el numero de dpi es"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDpi('+parametos.dpi+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente de dpi "+parametos.acta;
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de dpi  "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /*  set licencia 
     se guarda el nuevo numero de licencia
@@ -371,23 +531,22 @@ app.post('/setLicencia',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set licencia");
     console.log(parametos);  
-   /* var respuesta=
-    {
-      estado:"ok",
-      mensaje:"entro en set licencia"
-    };
-    res.end(JSON.stringify(respuesta));  */
-    connection.query('call insertarLicencia(0,\''+parametos.tipo+'\','+parametos.dpi+');', function(err, rows, fields) {
+    //call setLicencia(1000002410102);
+    connection.query('call setLicencia('+parametos.dpi+',\''+parametos.tipo+'\');', function(err, rows, fields) {
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     });
 });
 /**setActualizar
@@ -404,17 +563,22 @@ app.post('/setActualizar',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set actualizar");
     console.log(parametos);
-    connection.query('call actualizarTipoLicencia('+parametos.dpi+',\''+parametos.tipo+'\');', function(err, rows, fields) {
+    //call setActualizar(1000002410102,"B");
+    connection.query('call setActualizar('+parametos.dpi+',\''+parametos.tipo+'\');', function(err, rows, fields) {
       if (err) throw err;
-      var algo= rows[0];  //JSON.stringify(rows[0])
-      var algo2=algo[0];
-      console.log(algo[0].resultado);
-      //console.log('The solution is: ', rows[0].solution);
-      var respuesta=algo[0].resultado;
-      console.log(respuesta);
-      console.log(JSON.parse(respuesta));
-      respuesta=JSON.parse(respuesta);
-    res.end(JSON.stringify(respuesta));
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
     }); 
 });
 /**
