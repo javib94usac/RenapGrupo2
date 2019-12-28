@@ -172,9 +172,33 @@ app.post('/getMatrimonio',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get matrimonio"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getMatrimonio('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";11111111
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /* defuncions procedimientos
 *   crear una nueva acta de defunción
@@ -226,9 +250,33 @@ app.post('/getDefuncion',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get defuncion"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDefuncion('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 
 /*
@@ -282,9 +330,33 @@ app.post('/getDivorcio',async(req,res)=>
     var respuesta=
     {
       estado:"ok",
-      mensaje:"llego a get divorcio"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDivorcio('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    });
 });
 /*
     setNuevaContraseña
@@ -336,13 +408,36 @@ app.post('/getLogin',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  getLogin");
     console.log(parametos);
-    
     var respuesta=
     {
       estado:"ok",
-      mensaje:"error en el login "
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getLogin('+parametos.dpi+',\''+parametos.password+'\');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" informaccion de acceso erronea ";
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /* set dpi 
         se utiliza para generar un nuevo numero de dpi
@@ -391,13 +486,36 @@ app.post('/getDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  get DPI");
     console.log(parametos);
-    
     var respuesta=
     {
       estado:"ok",
-      mensaje:"el numero de dpi es"
+      mensaje:"ddd"
     };
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getDpi('+parametos.dpi+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
 });
 /*  set licencia 
     se guarda el nuevo numero de licencia
