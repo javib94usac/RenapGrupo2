@@ -187,7 +187,7 @@ app.post('/getMatrimonio',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente";11111111
+        respuesta.mensaje="informacion obtenida  exitosamente matrimonio";
         respuesta.info=r;
       }
       else
@@ -265,7 +265,7 @@ app.post('/getDefuncion',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.mensaje="informacion obtenida  exitosamente defuncion";
         respuesta.info=r;
       }
       else
@@ -345,7 +345,7 @@ app.post('/getDivorcio',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.mensaje="informacion obtenida  exitosamente del divorcio";
         respuesta.info=r;
       }
       else
@@ -504,13 +504,13 @@ app.post('/getDPI',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente";
+        respuesta.mensaje="informacion obtenida  exitosamente de dpi "+parametos.acta;
         respuesta.info=r;
       }
       else
       {
         respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+        respuesta.mensaje=" no se encontro infomracion del numero de dpi  "+parametos.acta;
       }
      
       console.log(respuesta);

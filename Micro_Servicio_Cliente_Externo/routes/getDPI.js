@@ -13,7 +13,7 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      acta: req.body.acta,
+      dpi: req.body.acta,
       resultado:"acta en proceso",
       
   };
@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
         }
       }*/
   console.log(datos); 
-  var comprobar= new compro(datos.acta,"adfadf");
+  var comprobar= new compro(datos.dpi,"adfadf");
   if(comprobar.get_vacio())
   {
     if (comprobar.get_es_numero())
@@ -72,7 +72,7 @@ router.post('/', function(req, res, next) {
     else 
     {
     
-      datos.resultado="el numero de acta no es valido";
+      datos.resultado="el numero de dpi no es valido";
       res.render('menu',{datos});
     }
   }

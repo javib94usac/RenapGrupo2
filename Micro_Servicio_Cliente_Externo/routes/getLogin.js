@@ -63,7 +63,7 @@ router.post('/', function(req, res, next) {
               // always executed
               console.log("always executed");
               //res.end(JSON.stringify({mess:"always executed"}));
-              if(datos.resultado.estado=='ok')
+              if(datos.resultado.estado=='200')
               {
                 res.render('menu');
               }
