@@ -91,13 +91,22 @@ app.post('/getNacimiento',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta en getNacimientos");
     console.log(parametos);
-   var respuesta=
-    {
-      estado:"ok",
-      mensaje:"llego a get nacimineto"
-    };
-    
-    res.end(JSON.stringify(respuesta));  
+    connection.query('call getNacimiento('+parametos.acta+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+      r=JSON.stringify(r);
+      r=r.replace('@','');
+      console.log(r);
+      r=JSON.parse(r);
+      console.log(r);
+      r=r.resultadoB;
+      r=JSON.parse(r);
+      console.log(r);
+      var respuesta= r;
+      res.end(JSON.stringify(respuesta));
+    });
 });
 /* servicios matrimonio
     crear una nueva acta de defunción
