@@ -1,6 +1,15 @@
 pipeline {
     agent none 
     stages {
+        stage('x') {
+         agent {
+                node {
+                    label 'master'
+                    customWorkspace '/home/javib94/app/RenapGrupo2/'
+                }
+            }
+            sh 'cat $USER'
+        }    
         stage('BUILD & TEST') {
             agent { 
                 docker { 
