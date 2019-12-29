@@ -7,8 +7,10 @@ pipeline {
                     label 'master'
                     customWorkspace '/home/javib94/app/RenapGrupo2/'
                 }
+            } 
+            steps {
+                sh 'cat $USER'
             }
-            sh 'cat $USER'
         }    
         stage('BUILD & TEST') {
             agent { 
