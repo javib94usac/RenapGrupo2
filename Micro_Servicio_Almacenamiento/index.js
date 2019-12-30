@@ -124,7 +124,7 @@ app.post('/getNacimiento',async(req,res)=>
       else
       {
         respuesta.estado="401";
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpipadremadre;
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpipadremadreg;
       }
      
       console.log(respuesta);
