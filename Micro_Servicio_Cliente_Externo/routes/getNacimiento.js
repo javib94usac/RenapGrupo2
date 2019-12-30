@@ -3,6 +3,7 @@ var compro = require("../public/javascripts/Comprobaciones.js");
 const axios=require('axios');
 const PDF = require('pdfkit');
 const fs = require('fs');
+
 var router = express.Router();
 
 /* GET home page. */
@@ -59,11 +60,15 @@ router.post('/', function(req, res, next) {
               {
                 datos.info=JSON.stringify(response.data.info);
                 var doc = new PDF();
-                doc.pipe(fs.createWriteStream(__dirname + '/repote_nacimineto.pdf'));
+                var stream=doc.pipe(blobStream());
+                doc.pipe(fs.createWriteStream(__dirname + '/reporte_nacimiento.pdf'));
                 doc.text(datos.info,{
 	              align: 'justify'
                 });
                 doc.end();
+                stream.on('finish',function(){
+                    iframe.src=stream.toBlobURL('/reporte_nacimiento.pdf');
+                });
                 estado='200';
               }
              
