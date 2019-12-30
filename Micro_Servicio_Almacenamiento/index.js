@@ -104,10 +104,19 @@ app.post('/getNacimiento',async(req,res)=>
 
       if(r!=undefined)
       {
-        r=JSON.stringify(r);
-        console.log(r);
-        r=JSON.parse(r);
-        console.log(r);
+        
+        var fila;
+        var vecFila=[];
+        console.log("dddd");
+        for(var i=0;i<rows[0].length;i++)
+        {
+          fila=rows[0][i];
+          vecFila.push(fila);
+          //console.log(fila);
+        }
+        console.log("--------------");
+        console.log(vecFila);
+        r=vecFila;
         respuesta.estado="200";
         respuesta.mensaje="informacion obtenida  exitosamente"+parametos.dpi;
         respuesta.info=r;
@@ -182,10 +191,19 @@ app.post('/getMatrimonio',async(req,res)=>
 
       if(r!=undefined)
       {
-        r=JSON.stringify(r);
-        console.log(r);
-        r=JSON.parse(r);
-        console.log(r);
+        var fila;
+        var vecFila=[];
+        console.log("dddd");
+        for(var i=0;i<rows[0].length;i++)
+        {
+          fila=rows[0][i];
+          vecFila.push(fila);
+          //console.log(fila);
+        }
+        console.log("--------------");
+        console.log(vecFila);
+        //console.log(r);
+        r=vecFila;
         respuesta.estado="200";
         respuesta.mensaje="informacion obtenida  exitosamente matrimonio";
         respuesta.info=r;
@@ -260,10 +278,19 @@ app.post('/getDefuncion',async(req,res)=>
 
       if(r!=undefined)
       {
-        r=JSON.stringify(r);
-        console.log(r);
-        r=JSON.parse(r);
-        console.log(r);
+        var fila;
+        var vecFila=[];
+        console.log("dddd");
+        for(var i=0;i<rows[0].length;i++)
+        {
+          fila=rows[0][i];
+          vecFila.push(fila);
+          //console.log(fila);
+        }
+        console.log("--------------");
+        console.log(vecFila);
+        //console.log(r);
+        r=vecFila;
         respuesta.estado="200";
         respuesta.mensaje="informacion obtenida  exitosamente defuncion";
         respuesta.info=r;
