@@ -10,7 +10,7 @@ pipeline {
             }
             steps {
                 sh 'echo Instalando Dependencias......'
-                sh 'npm install jshint -g'
+                //sh 'npm install jshint -g'
                 sh 'cd Micro_Servicio_Actas_Nacimiento && npm install'
                 sh 'cd ..'
                 sh 'cd Micro_Servicio_Actas_Nacimiento/Test && npm install'
