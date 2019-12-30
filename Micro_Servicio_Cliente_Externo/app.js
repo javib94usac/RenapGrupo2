@@ -14,6 +14,7 @@ var getMatrimonioRouter=require('./routes/getMatrimonio');
 var getDefuncionRouter=require('./routes/getDefuncion');
 var getDivorcioRouter=require('./routes/getDivorcio');
 var getDPIRouter=require('./routes/getDPI');
+var getLicencia=require('./routes/getLicencia');
 
 //*** */
 var app = express();
@@ -37,6 +38,7 @@ app.use('/getMatrimonio',getMatrimonioRouter);
 app.use('/getDefuncion',getDefuncionRouter);
 app.use('/getDivorcio',getDivorcioRouter);
 app.use('/getDPI',getDPIRouter);
+app.use('/getLicencia',getLicencia);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
