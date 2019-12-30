@@ -342,7 +342,7 @@ app.post('/getDivorcio',async(req,res)=>
       {
         var fila;
         console.log("dddd");
-        for(var i=0;i<rows.length;i++)
+        for(var i=0;i<rows[0].length;i++)
         {
           fila=rows[0][i];
           console.log(fila);
