@@ -54,7 +54,7 @@ router.post('/', function(req, res, next) {
               console.log(datos.resultado);
               if(response.data.estado='200')
               {
-                datos.info=JSON.stringify(response.data.info)
+                datos.info=JSON.stringify(response.data.info);
               }
              
 

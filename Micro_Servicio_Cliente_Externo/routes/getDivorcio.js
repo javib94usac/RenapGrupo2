@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
   {
       acta: req.body.acta,
       resultado:"acta en proceso",
+      info:''
       
   };
   /*
@@ -52,7 +53,10 @@ router.post('/', function(req, res, next) {
               //res.end(response);
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
-             
+              if(response.data.estado='200')
+              {
+                datos.info=JSON.stringify(response.data.info);
+              }
 
           })
           .catch(function (error) {
