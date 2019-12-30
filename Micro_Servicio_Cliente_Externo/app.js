@@ -43,6 +43,17 @@ app.use('/getLicencia',getLicencia);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+app.get('/descargar/:id',function(req,res)
+{
+    res.download(__dirname+'/public/'+req.params.id,
+        req.params.id,function(err)
+        {
+          if(err)
+          {
+            console.log(err);
+          }
+        });
+});
 
 // error handler
 app.use(function(err, req, res, next) {

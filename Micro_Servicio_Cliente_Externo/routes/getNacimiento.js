@@ -61,15 +61,12 @@ router.post('/', function(req, res, next) {
                 datos.info=JSON.stringify(response.data.info);
                 var doc = new PDF();
                 var stream=doc.pipe(blobStream());
-                doc.pipe(fs.createWriteStream(__dirname + '/reporte_nacimiento.pdf'));
+                doc.pipe(fs.createWriteStream(__dirname + '/public/reporte_nacimiento.pdf'));
                 doc.text(datos.info,{
 	              align: 'justify'
                 });
                 doc.end();
-                stream.on('finish',function(){
-                    iframe.src=stream.toBlobURL('/reporte_nacimiento.pdf');
-                });
-                estado='200';
+                datos.reporte='reporte_nacimiento.pdf';
               }
              
 
