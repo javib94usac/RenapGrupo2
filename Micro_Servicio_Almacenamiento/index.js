@@ -504,13 +504,13 @@ app.post('/getDPI',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente de dpi "+parametos.acta;
+        respuesta.mensaje="informacion obtenida  exitosamente de dpi "+parametos.dpi;
         respuesta.info=r;
       }
       else
       {
         respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de dpi  "+parametos.acta;
+        respuesta.mensaje=" no se encontro infomracion del numero de dpi  "+parametos.dpi;
       }
      
       console.log(respuesta);
