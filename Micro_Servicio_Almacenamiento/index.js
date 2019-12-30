@@ -118,13 +118,13 @@ app.post('/getNacimiento',async(req,res)=>
         console.log(vecFila);
         r=vecFila;
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente"+parametos.dpi;
+        respuesta.mensaje="informacion obtenida  exitosamente"+parametos.dpipadremadre;
         respuesta.info=r;
       }
       else
       {
         respuesta.estado="401";
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpi;
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpipadremadre;
       }
      
       console.log(respuesta);
