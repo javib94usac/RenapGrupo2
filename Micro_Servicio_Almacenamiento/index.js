@@ -341,13 +341,16 @@ app.post('/getDivorcio',async(req,res)=>
       if(r!=undefined)
       {
         var fila;
+        var vecFila;
         console.log("dddd");
         for(var i=0;i<rows[0].length;i++)
         {
           fila=rows[0][i];
+          vecFila.push(fila);
           console.log(fila);
         }
         console.log("--------------");
+        console.log(vecFila);
         r=JSON.stringify(r);
         //console.log(r);
         r=JSON.parse(r);
