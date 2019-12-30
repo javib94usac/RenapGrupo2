@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
 	              align: 'justify'
                 });
                 doc.end();
-                datos.reporte='reporte_nacimiento.pdf';
+                datos.reporte='/public/reporte_nacimiento.pdf';
               }
              
 
