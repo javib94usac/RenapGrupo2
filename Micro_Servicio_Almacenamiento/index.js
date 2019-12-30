@@ -96,7 +96,7 @@ app.post('/getNacimiento',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getNacimiento('+parametos.acta+');', function(err, rows, fields) {  
+    connection.query('call getNacimiento('+parametos.dpi+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -109,13 +109,13 @@ app.post('/getNacimiento',async(req,res)=>
         r=JSON.parse(r);
         console.log(r);
         respuesta.estado="200";
-        respuesta.mensaje="informacion obtenida  exitosamente"
+        respuesta.mensaje="informacion obtenida  exitosamente"+parametos.dpi;
         respuesta.info=r;
       }
       else
       {
-        respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta
+        respuesta.estado="401";
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpi;
       }
      
       console.log(respuesta);
@@ -174,7 +174,7 @@ app.post('/getMatrimonio',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getMatrimonio('+parametos.acta+');', function(err, rows, fields) {  
+    connection.query('call getMatrimonio('+parametos.dpi+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -192,8 +192,8 @@ app.post('/getMatrimonio',async(req,res)=>
       }
       else
       {
-        respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+        respuesta.estado="401";
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpi;
       }
      
       console.log(respuesta);
@@ -252,7 +252,7 @@ app.post('/getDefuncion',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getDefuncion('+parametos.acta+');', function(err, rows, fields) {  
+    connection.query('call getDefuncion('+parametos.dpi+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -270,8 +270,8 @@ app.post('/getDefuncion',async(req,res)=>
       }
       else
       {
-        respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+        respuesta.estado="401";
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpi;
       }
      
       console.log(respuesta);
@@ -332,7 +332,7 @@ app.post('/getDivorcio',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getDivorcio('+parametos.acta+');', function(err, rows, fields) {  
+    connection.query('call getDivorcio('+parametos.dpi+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -350,8 +350,8 @@ app.post('/getDivorcio',async(req,res)=>
       }
       else
       {
-        respuesta.estado="401"
-        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.acta;
+        respuesta.estado="401";
+        respuesta.mensaje=" no se encontro infomracion del numero de acta "+parametos.dpi;
       }
      
       console.log(respuesta);
