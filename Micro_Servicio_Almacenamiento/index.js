@@ -337,21 +337,21 @@ app.post('/getDivorcio',async(req,res)=>
       console.log(rows);
       var r=rows[0];
       r=r[0];
-
+      
       if(r!=undefined)
       {
         var fila;
         console.log("dddd");
         for(var i=0;i<rows.length;i++)
         {
-          fila=rows[i];
+          fila=rows[0][i];
           console.log(fila);
         }
         console.log("--------------");
         r=JSON.stringify(r);
-        console.log(r);
+        //console.log(r);
         r=JSON.parse(r);
-        console.log(r);
+       // console.log(r);
         respuesta.estado="200";
         respuesta.mensaje="informacion obtenida  exitosamente del divorcio";
         respuesta.info=r;
