@@ -82,7 +82,7 @@ router.post('/', function(req, res, next) {
               if(estado=='200')
               {
                 var file = __dirname + '/repote_nacimineto.pdf';
-                res.download(file);
+                res.download(flie);
               }
           });
         
