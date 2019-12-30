@@ -581,6 +581,43 @@ app.post('/setActualizar',async(req,res)=>
       res.end(JSON.stringify(respuesta));
     }); 
 });
+/** */
+app.post('/getLicencia',async(req,res)=>
+{
+    var parametos=req.body.params;
+    console.log("enta  get DPI");
+    console.log(parametos);
+    var respuesta=
+    {
+      estado:"ok",
+      mensaje:"ddd"
+    };
+    connection.query('call getLicencia('+parametos.dpi+');', function(err, rows, fields) {  
+      if (err) throw err;
+      console.log(rows);
+      var r=rows[0];
+      r=r[0];
+
+      if(r!=undefined)
+      {
+        r=JSON.stringify(r);
+        console.log(r);
+        r=JSON.parse(r);
+        console.log(r);
+        respuesta.estado="200";
+        respuesta.mensaje="informacion obtenida  exitosamente de licencia "+parametos.dpi;
+        respuesta.info=r;
+      }
+      else
+      {
+        respuesta.estado="401"
+        respuesta.mensaje=" no se encontro infomracion del numero de licencia  "+parametos.dpi;
+      }
+     
+      console.log(respuesta);
+      res.end(JSON.stringify(respuesta));
+    }); 
+});
 /**
  * meto de inicio donde corre el puerto
  */

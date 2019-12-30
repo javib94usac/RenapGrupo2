@@ -77,7 +77,20 @@
   
 </form>
 <br>
-
+<form action="getLicencia" method="post" >
+  <h2>Consultar Licencia</h2><br>
+  Numero DPI :<br>
+  <input type="text" name="acta" size=20><br> 
+  Ruta ESB:<br>
+  <select name="esb">
+    <option value="35.239.54.7">Grupo 2</option> 
+    <option value="35.184.41.20">Grupo 1</option> 
+    <option value="35.193.113.191">Grupo 4</option>  
+  </select>                              
+  <br>
+  <input type="submit" value="Consultar">
+  
+</form>
  <h1 style="color:blue;">{{datos.resultado}}</h1>
  <br>
   <h1 style="color:darkgrey;">{{datos.info}}</h1>
