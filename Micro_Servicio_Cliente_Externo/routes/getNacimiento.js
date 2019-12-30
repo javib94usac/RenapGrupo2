@@ -15,7 +15,7 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpi: req.body.acta,
+      dpipadremadre: req.body.acta,
       resultado:"acta en proceso",
       info:''
   };
@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
         }
       }*/
   console.log(datos); 
-  var comprobar= new compro(datos.dpi,"adfadf");
+  var comprobar= new compro(datos.dpipadremadre,"adfadf");
   if(comprobar.get_vacio())
   {
     if (comprobar.get_es_numero())
@@ -79,11 +79,11 @@ router.post('/', function(req, res, next) {
               console.log("always executed");
               //res.end(JSON.stringify({mess:"always executed"}));
               res.render('menu',{datos});
-              if(estado=='200')
+              /*if(estado=='200')
               {
                 var file = __dirname + '/repote_nacimineto.pdf';
                 res.download(flie);
-              }
+              }*/
           });
         
        

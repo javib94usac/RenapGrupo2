@@ -96,7 +96,7 @@ app.post('/getNacimiento',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getNacimiento('+parametos.dpi+');', function(err, rows, fields) {  
+    connection.query('call getNacimiento('+parametos.dpipadremadre+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
