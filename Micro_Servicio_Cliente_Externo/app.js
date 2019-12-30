@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 });
 app.get('/descargar/:id',function(req,res)
 {
-    res.download(__dirname+'/'+req.params.id,
+    res.download(__dirname+'/routes'+req.params.id,
         req.params.id,function(err)
         {
           if(err)
