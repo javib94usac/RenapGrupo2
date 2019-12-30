@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh 'echo Pruebas Aprobadas...'
                 sh 'echo Actualizando el servidor...'
-                sh 'su javib94'
+                //sh 'su javib94'
                 sh 'cd /home/javib94/app/RenapGrupo2'
                 sh 'docker-compose down'
                 //sh 'sudo sed -i \'s+https://github.com+ssh://git@github.com+g\' .git/config'
