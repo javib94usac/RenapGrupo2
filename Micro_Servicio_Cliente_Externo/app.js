@@ -15,7 +15,7 @@ var getDefuncionRouter=require('./routes/getDefuncion');
 var getDivorcioRouter=require('./routes/getDivorcio');
 var getDPIRouter=require('./routes/getDPI');
 var getLicencia=require('./routes/getLicencia');
-
+var descargarRouter=require('./routes/descargar');
 //*** */
 var app = express();
 
@@ -39,10 +39,12 @@ app.use('/getDefuncion',getDefuncionRouter);
 app.use('/getDivorcio',getDivorcioRouter);
 app.use('/getDPI',getDPIRouter);
 app.use('/getLicencia',getLicencia);
+app.use('/descargar',descargarRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+/*
 app.get('/descargar/:id',function(req,res)
 {
     res.download(__dirname+'/routes'+req.params.id,
@@ -53,7 +55,7 @@ app.get('/descargar/:id',function(req,res)
             console.log(err);
           }
         });
-});
+});*/
 
 // error handler
 app.use(function(err, req, res, next) {
