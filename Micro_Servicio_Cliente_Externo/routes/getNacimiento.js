@@ -1,6 +1,8 @@
 var express = require('express');
 var compro = require("../public/javascripts/Comprobaciones.js");
 const axios=require('axios');
+const PDF = require('pdfkit');
+const fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
@@ -17,6 +19,7 @@ router.post('/', function(req, res, next) {
       resultado:"acta en proceso",
       info:''
   };
+  var estado="401";
   /*
       Esto en maso manos lo que tendria que venir en el body
       {
@@ -55,6 +58,13 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var doc = new PDF();
+                doc.pipe(fs.createWriteStream(__dirname + '/repote_nacimineto.pdf'));
+                doc.text(datos.info,{
+	              align: 'justify'
+                });
+                doc.end();
+                estado='200';
               }
              
 
@@ -68,8 +78,12 @@ router.post('/', function(req, res, next) {
               // always executed
               console.log("always executed");
               //res.end(JSON.stringify({mess:"always executed"}));
-              res.render('menu',{datos})
-              
+              res.render('menu',{datos});
+              if(estado=='200')
+              {
+                var file = __dirname + '/repote_nacimineto.pdf';
+                res.download(file);
+              }
           });
         
        

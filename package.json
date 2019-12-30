@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/javib94usac/RenapGrupo2/issues"
   },
-  "homepage": "https://github.com/javib94usac/RenapGrupo2#readme"
+  "homepage": "https://github.com/javib94usac/RenapGrupo2#readme",
+  "dependencies": {
+    "pdfkit": "^0.11.0"
+  }
 }
