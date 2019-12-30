@@ -13,8 +13,8 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpiPapa: req.body.dpiPapa,
-      dpiMama: req.body.dpiMama,
+      dpipapa: req.body.dpiPapa,
+      dpimama: req.body.dpiMama,
       apellidos:req.body.apellidos,
       nombres: req.body.nombres,
       genero:req.body.genero,
@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
         }
       }*/
   console.log(datos); 
-  var comprobar= new compro(datos.dpiPapa,datos.dpiMama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento,datos.fecha);
+  var comprobar= new compro(datos.dpipapa,datos.dpimama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento,datos.fecha);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())

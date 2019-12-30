@@ -39,7 +39,7 @@ app.get('/',function(req,res){
     parametro 
     {
          dpiPapa: '0123456789123',
-        dpiMama: '0123456789123',
+        dpimama: '0123456789123',
         apellidos: 'perez lopez',
         nombres: 'maria jose',
         genero: 'Maculino',
@@ -60,7 +60,7 @@ app.post('/setNacimiento',async(req,res)=>
       mensaje:"llego a set nacimineto set nacimento"
     };
     res.end(JSON.stringify(respuesta));*/
-    connection.query('call setNacimiento(\''+parametos.nombres+'\',\''+parametos.apellidos+'\','+parametos.dpiPapa+','+parametos.dpiMama+',\''+parametos.fecha+'\',\''+parametos.genero+'\','+parametos.municipio+');', function(err, rows, fields) {  
+    connection.query('call setNacimiento(\''+parametos.nombres+'\',\''+parametos.apellidos+'\','+parametos.dpipapa+','+parametos.dpimama+',\''+parametos.fecha+'\',\''+parametos.genero+'\','+parametos.municipio+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -138,7 +138,7 @@ app.post('/setMatrimonio',async(req,res)=>
     console.log("enta en setMatriminio");
     console.log(parametos);
     //call setMatrimonio("2019-12-26",1000002210102,1000002310102);
-    connection.query('call setMatrimonio(\''+parametos.fecha+'\','+parametos.dpiHombre+','+parametos.dpiMujer+');', function(err, rows, fields) {
+    connection.query('call setMatrimonio(\''+parametos.fecha+'\','+parametos.dpihombre+','+parametos.dpimujer+');', function(err, rows, fields) {
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -284,7 +284,7 @@ app.post('/getDefuncion',async(req,res)=>
     crear una nueva acta de divorcio
     parametros
     {
-        dpiEsposo //numero de dpi
+        dpiesposo //numero de dpi
         dpiEsposa //nmero de dpi
         fecha // fecha
         resltado // devuelve ok o error ok numero de acta divorcio
@@ -296,7 +296,7 @@ app.post('/setDivorcio',async(req,res)=>
     console.log("enta en setDivorcio");
     console.log(parametos);
     //call setDivorcio("2019-12-27",1000002210102,1000002310102);
-    connection.query('call setDivorcio(\''+parametos.fecha+'\','+parametos.dpiEsposo+','+parametos.dpiEsposa+');', function(err, rows, fields) {
+    connection.query('call setDivorcio(\''+parametos.fecha+'\','+parametos.dpiesposo+','+parametos.dpiesposa+');', function(err, rows, fields) {
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -413,7 +413,7 @@ app.post('/getLogin',async(req,res)=>
       estado:"ok",
       mensaje:"ddd"
     };
-    connection.query('call getLogin('+parametos.dpi+',\''+parametos.password+'\');', function(err, rows, fields) {  
+    connection.query('call getLogin('+parametos.dpi+',\''+parametos.clave+'\');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -610,7 +610,7 @@ app.post('/getLicencia',async(req,res)=>
       }
       else
       {
-        respuesta.estado="401"
+        respuesta.estado="401";
         respuesta.mensaje=" no se encontro infomracion del numero de licencia  "+parametos.dpi;
       }
      

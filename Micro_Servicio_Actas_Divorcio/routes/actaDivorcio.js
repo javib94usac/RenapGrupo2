@@ -8,14 +8,14 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpiEsposo: req.body.dpiEsposo,
-      dpiEsposa: req.body.dpiEsposa,
+      dpiesposo: req.body.dpiEsposo,
+      dpiesposa: req.body.dpiEsposa,
       fecha:req.body.fecha,
       resultado:"acta en proceso",
       
   }
   console.log(datos); 
-  var comprobar= new compro(datos.dpiEsposa,datos.dpiEsposo,datos.fecha);
+  var comprobar= new compro(datos.dpiesposa,datos.dpiesposo,datos.fecha);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())

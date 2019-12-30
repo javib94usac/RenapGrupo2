@@ -8,13 +8,13 @@ const axios = require('axios');
 /* Se extrae los datos de la vista para ejecutar el metodo post. */
 router.post("/", function(req, res, next) {
   datos = {
-    dpiHombre: req.body.dpiHombre, //dpi  del hombre, futuro esposo
-    dpiMujer: req.body.dpiMujer, // dpi de la mujer, futura esposa
+    dpihombre: req.body.dpiHombre, //dpi  del hombre, futuro esposo
+    dpimujer: req.body.dpiMujer, // dpi de la mujer, futura esposa
     fecha: req.body.fecha,    // fecha en la que se casaron
     resultado: "Acta en proceso"
   };
   console.log(datos);
-   var comprobar = new compro(datos.dpiHombre,datos.dpiMujer,datos.fecha);
+   var comprobar = new compro(datos.dpihombre,datos.dpimujer,datos.fecha);
    if (comprobar.get_vacio()){
 
       if (comprobar.get_dpi_validos()){

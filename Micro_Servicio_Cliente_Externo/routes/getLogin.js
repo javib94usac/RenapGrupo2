@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
   var datos=
   {
       dpi: req.body.dpi,
-      password: req.body.password,
+      clave: req.body.password,
       resultado:"acta en proceso",
       
   };
