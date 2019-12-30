@@ -3,7 +3,7 @@ services:
     Nacimiento:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Actas_Nacimiento:/usr/app/
       ports:
@@ -15,7 +15,7 @@ services:
     ClienteInterno:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Cliente_Interno:/usr/app/
       ports:
@@ -27,7 +27,7 @@ services:
     ClienteExterno:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Cliente_Externo:/usr/app/
       ports:
@@ -39,7 +39,7 @@ services:
     Defuncion:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Actas_Defuncion:/usr/app/
       ports:
@@ -51,7 +51,7 @@ services:
     Divorcio:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Actas_Divorcio:/usr/app/
       ports:
@@ -63,7 +63,7 @@ services:
     Matrimonio:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && npm start
+      command: bash -c "npm install && npm start"
       volumes:
         - ./Micro_Servicio_Actas_Matrimonio:/usr/app/
       ports:
@@ -75,7 +75,7 @@ services:
     Almacenamiento:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && node index.js
+      command: bash -c "npm install && node index.js"
       volumes:
         - ./Micro_Servicio_Almacenamiento:/usr/app/
       ports:
@@ -87,7 +87,7 @@ services:
     ServiceBus:
       image: node:13.3.0
       working_dir: /usr/app
-      command: npm install && node index.js
+      command: bash -c "npm install && node index.js"
       volumes:
         - ./Micro_Servicio_ESB:/usr/app/
       ports:
@@ -96,25 +96,5 @@ services:
         main:
           aliases:
             - ServiceBus
-    #ServiceBusB:
-      #image: node:13.3.0
-      #working_dir: /usr/app
-      #command: node index.js
-      #volumes:
-      #  - ./Micro_Servicio_ESB:/usr/app/
-     # ports:
-      #  - "10002:10000"
-      #networks:
-      #  main:
-     #     aliases:
-     #       - ServiceBusB
-    #ServiceBus:
-        #image: nginx
-        #volumes:
-        #- ./Nginx_Lb/nginx.conf:/etc/nginx/nginx.conf
-        #networks:
-          #main:
-          #  aliases:
-          #    - ServiceBus
 networks:
   main:
