@@ -56,6 +56,25 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var vec=response.data.info;
+                var cuerpo="reporte actas defuncion \n";
+                for(var i=0;i<vec.length;i++)
+                { 
+                  cuerpo+="nodefuncion: "+vec[i].nodefuncion+"\n";
+                  cuerpo+="fecha: "+vec[i].fecha+"\n";
+                  cuerpo+="nombre: "+vec[i].nombre+"\n";
+                  cuerpo+="apellido : "+vec[i].apellido+"\n";
+                  cuerpo+= "----------------------\n";
+
+                }
+                datos.info=vec;
+                var doc = new PDF();
+                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                doc.text(cuerpo,{
+	              align: 'justify'
+                });
+                doc.end();
+                datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
 
           })

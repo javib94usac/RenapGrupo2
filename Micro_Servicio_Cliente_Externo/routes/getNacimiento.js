@@ -73,7 +73,10 @@ router.post('/', function(req, res, next) {
                   cuerpo+="nombremadre: "+vec[i].nombremadre+"\n";
                   cuerpo+="apellidomadre: "+vec[i].apellidomadre+"\n";
                   cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                  cuerpo+= "----------------------\n";
+
                 }
+                datos.info=vec;
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
                 doc.text(cuerpo,{

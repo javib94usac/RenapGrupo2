@@ -1,6 +1,8 @@
 var express = require('express');
 var compro = require("../public/javascripts/Comprobaciones.js");
 const axios=require('axios');
+const PDF = require('pdfkit');
+const fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
@@ -55,6 +57,29 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var vec=response.data.info;
+                var cuerpo="reporte actas de matrimonio \n";
+                for(var i=0;i<vec.length;i++)
+                { 
+                  cuerpo+="nomatrimonio: "+vec[i].nomatrimonio+"\n";
+                  cuerpo+="dpihombre: "+vec[i].dpihombre+"\n";
+                  cuerpo+="nombrehombre: "+vec[i].nombrehombre+"\n";
+                  cuerpo+="apellidohombre: "+vec[i].apellidohombre+"\n";
+                  cuerpo+="dpimujer: "+vec[i].dpimujer+"\n";
+                  cuerpo+="nombremujer: "+vec[i].nombremujer+"\n";
+                  cuerpo+="apellidomujer: "+vec[i].apellidomujer+"\n";
+                  cuerpo+="fecha: "+vec[i].fecha+"\n";
+                  cuerpo+= "----------------------\n";
+
+                }
+                datos.info=vec;
+                var doc = new PDF();
+                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                doc.text(cuerpo,{
+	              align: 'justify'
+                });
+                doc.end();
+                datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
              
 

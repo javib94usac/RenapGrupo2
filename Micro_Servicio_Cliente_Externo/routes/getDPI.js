@@ -56,6 +56,33 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var vec=response.data.info;
+                var cuerpo="reporte  DPI \n";
+                for(var i=0;i<vec.length;i++)
+                { 
+                  cuerpo+="idnacimiento: "+vec[i].idnacimiento+"\n";
+                  cuerpo+="nombre: "+vec[i].nombre+"\n";
+                  cuerpo+="apellido: "+vec[i].apellidos+"\n";
+                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                  cuerpo+="departamento: "+vec[i].departamento+"\n";
+                  cuerpo+="municipio: "+vec[i].municipio+"\n";
+                  cuerpo+="genero: "+vec[i].genero+"\n";
+                  cuerpo+="estadocivil: "+vec[i].estadocivil+"\n";
+                  cuerpo+="dpi: "+vec[i].dpi+"\n";
+                  cuerpo+="dpiPadre: "+vec[i].dpiPadre+"\n";
+                  cuerpo+="dpiMadre: "+vec[i].dpiMadre+"\n";
+                  cuerpo+= "----------------------\n";
+
+                }
+                datos.info=vec;
+                var doc = new PDF();
+                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                doc.text(cuerpo,{
+	              align: 'justify'
+                });
+                doc.end();
+                datos.reporte=__dirname + '/reportes/reporte.pdf';
+              
               }
 
           })

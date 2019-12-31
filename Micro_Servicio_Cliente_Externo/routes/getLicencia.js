@@ -56,6 +56,29 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var vec=response.data.info;
+                var cuerpo="reporte Licencia \n";
+                for(var i=0;i<vec.length;i++)
+                { 
+                  
+                  cuerpo+="nombre: "+vec[i].nombre+"\n";
+                  cuerpo+="apellidos: "+vec[i].apellidos+"\n";
+                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                  cuerpo+="tipo: "+vec[i].tipo+"\n";
+                  cuerpo+="anosAntiguedad: "+vec[i].anosAntiguedad+"\n";
+                  cuerpo+="genero: "+vec[i].genero+"\n";
+                  cuerpo+="dpi: "+vec[i].dpi+"\n";
+                  cuerpo+= "----------------------\n";
+
+                }
+                datos.info=vec;
+                var doc = new PDF();
+                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                doc.text(cuerpo,{
+	              align: 'justify'
+                });
+                doc.end();
+                datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
 
           })
