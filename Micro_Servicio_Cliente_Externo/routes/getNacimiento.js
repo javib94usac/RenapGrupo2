@@ -60,12 +60,12 @@ router.post('/', function(req, res, next) {
               {
                 datos.info=JSON.stringify(response.data.info);
                 var doc = new PDF();
-                doc.pipe(fs.createWriteStream(__dirname + '/reporte_nacimiento.pdf'));
+                doc.pipe(fs.createWriteStream(__dirname + '/public/reporte.pdf'));
                 doc.text(datos.info,{
 	              align: 'justify'
                 });
                 doc.end();
-                datos.reporte='/reporte_nacimiento.pdf';
+                datos.reporte='/public/reporte.pdf';
               }
              
 
