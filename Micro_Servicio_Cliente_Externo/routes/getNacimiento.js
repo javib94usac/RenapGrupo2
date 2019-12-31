@@ -59,9 +59,24 @@ router.post('/', function(req, res, next) {
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
+                var vec=response.data.info;
+                var cuerpo="reporte actas de nacimineto \n";
+                for(var i=0;i<vec.length;i++)
+                { 
+                  cuerpo+="noacta: "+vec[i].noacta+"\n";
+                  cuerpo+="nombre: "+vec[i].nombre+"\n";
+                  cuerpo+="apellido: "+vec[i].apellidos+"\n";
+                  cuerpo+="dpipadre: "+vec[i].dpipadre+"\n";
+                  cuerpo+="nombrepadre: "+vec[i].nombrepadre+"\n";
+                  cuerpo+="apellidopadre: "+vec[i].apellidopadre+"\n";
+                  cuerpo+="dpimadre: "+vec[i].dpimadre+"\n";
+                  cuerpo+="nombremadre: "+vec[i].nombremadre+"\n";
+                  cuerpo+="apellidomadre: "+vec[i].apellidomadre+"\n";
+                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                }
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
-                doc.text(datos.info,{
+                doc.text(cuerpo,{
 	              align: 'justify'
                 });
                 doc.end();
