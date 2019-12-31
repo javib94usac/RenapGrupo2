@@ -60,22 +60,22 @@ router.post('/', function(req, res, next) {
                 datos.info=JSON.stringify(response.data.info);
                 var vec=response.data.info;
                 var cuerpo="reporte  DPI \n";
-                for(var i=0;i<vec.length;i++)
-                { 
-                  cuerpo+="idnacimiento: "+vec[i].idnacimiento+"\n";
-                  cuerpo+="nombre: "+vec[i].nombre+"\n";
-                  cuerpo+="apellido: "+vec[i].apellidos+"\n";
-                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
-                  cuerpo+="departamento: "+vec[i].departamento+"\n";
-                  cuerpo+="municipio: "+vec[i].municipio+"\n";
-                  cuerpo+="genero: "+vec[i].genero+"\n";
-                  cuerpo+="estadocivil: "+vec[i].estadocivil+"\n";
-                  cuerpo+="dpi: "+vec[i].dpi+"\n";
-                  cuerpo+="dpiPadre: "+vec[i].dpiPadre+"\n";
-                  cuerpo+="dpiMadre: "+vec[i].dpiMadre+"\n";
+                //for(var i=0;i<vec.length;i++)
+                //{ 
+                  cuerpo+="idnacimiento: "+vec.idnacimiento+"\n";
+                  cuerpo+="nombre: "+vec.nombre+"\n";
+                  cuerpo+="apellido: "+vec.apellidos+"\n";
+                  cuerpo+="fechanac: "+vec.fechanac+"\n";
+                  cuerpo+="departamento: "+vec.departamento+"\n";
+                  cuerpo+="municipio: "+vec.municipio+"\n";
+                  cuerpo+="genero: "+vec.genero+"\n";
+                  cuerpo+="estadocivil: "+vec.estadocivil+"\n";
+                  cuerpo+="dpi: "+vec.dpi+"\n";
+                  cuerpo+="dpiPadre: "+vec.dpiPadre+"\n";
+                  cuerpo+="dpiMadre: "+vec.dpiMadre+"\n";
                   cuerpo+= "----------------------\n";
 
-                }
+                //}
                 datos.info=cuerpo;
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));

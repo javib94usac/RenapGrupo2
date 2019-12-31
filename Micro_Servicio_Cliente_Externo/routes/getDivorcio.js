@@ -62,7 +62,7 @@ router.post('/', function(req, res, next) {
                 var cuerpo="reporte actas divorcio \n";
                 for(var i=0;i<vec.length;i++)
                 { 
-                  cuerpo+="nodivorcio: "+vec[i].nodefuncion+"\n";
+                  cuerpo+="nodivorcio: "+vec[i].nodivorcio+"\n";
                   cuerpo+="fecha: "+vec[i].fecha+"\n";
                   cuerpo+="dpihombre "+vec[i].dpihombre+"\n";
                   cuerpo+="nombrehombre: "+vec[i].nombrehombre+"\n";

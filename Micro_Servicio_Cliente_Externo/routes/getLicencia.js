@@ -60,19 +60,19 @@ router.post('/', function(req, res, next) {
                 datos.info=JSON.stringify(response.data.info);
                 var vec=response.data.info;
                 var cuerpo="reporte Licencia \n";
-                for(var i=0;i<vec.length;i++)
-                { 
+                //for(var i=0;i<vec.length;i++)
+                //{ 
                   
-                  cuerpo+="nombre: "+vec[i].nombre+"\n";
-                  cuerpo+="apellidos: "+vec[i].apellidos+"\n";
-                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
-                  cuerpo+="tipo: "+vec[i].tipo+"\n";
-                  cuerpo+="anosAntiguedad: "+vec[i].anosAntiguedad+"\n";
-                  cuerpo+="genero: "+vec[i].genero+"\n";
-                  cuerpo+="dpi: "+vec[i].dpi+"\n";
+                  cuerpo+="nombre: "+vec.nombre+"\n";
+                  cuerpo+="apellidos: "+vec.apellidos+"\n";
+                  cuerpo+="fechanac: "+vec.fechanac+"\n";
+                  cuerpo+="tipo: "+vec.tipo+"\n";
+                  cuerpo+="anosAntiguedad: "+vec.anosAntiguedad+"\n";
+                  cuerpo+="genero: "+vec.genero+"\n";
+                  cuerpo+="dpi: "+vec.dpi+"\n";
                   cuerpo+= "----------------------\n";
 
-                }
+                //}
                 datos.info=cuerpo;
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
