@@ -65,7 +65,7 @@ router.post('/', function(req, res, next) {
 	              align: 'justify'
                 });
                 doc.end();
-                datos.reporte='/public/reporte.pdf';
+                datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
              
 
