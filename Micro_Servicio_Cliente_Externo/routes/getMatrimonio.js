@@ -72,7 +72,7 @@ router.post('/', function(req, res, next) {
                   cuerpo+= "----------------------\n";
 
                 }
-                datos.info=vec;
+                datos.info=cuerpo;
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
                 doc.text(cuerpo,{
