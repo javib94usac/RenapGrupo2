@@ -1,6 +1,8 @@
 var express = require('express');
 var compro = require("../public/javascripts/Comprobaciones.js");
 const axios=require('axios');
+const PDF = require('pdfkit');
+const fs = require('fs');
 var router = express.Router();
 
 /* GET home page. */
