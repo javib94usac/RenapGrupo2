@@ -58,35 +58,67 @@ router.post('/', function(req, res, next) {
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
               console.log(response.data);
-
-              if(response.data.estado='200')
+            
+              if(puerto!='9006')
               {
-                datos.info=JSON.stringify(response.data.info);
-                var vec=response.data.info;
+                var vec=response.data;
                 var cuerpo="reporte actas de nacimineto \n";
-                for(var i=0;i<vec.length;i++)
-                { 
-                  cuerpo+="noacta: "+vec[i].noacta+"\n";
-                  cuerpo+="nombre: "+vec[i].nombre+"\n";
-                  cuerpo+="apellido: "+vec[i].apellidos+"\n";
-                  cuerpo+="dpipadre: "+vec[i].dpipadre+"\n";
-                  cuerpo+="nombrepadre: "+vec[i].nombrepadre+"\n";
-                  cuerpo+="apellidopadre: "+vec[i].apellidopadre+"\n";
-                  cuerpo+="dpimadre: "+vec[i].dpimadre+"\n";
-                  cuerpo+="nombremadre: "+vec[i].nombremadre+"\n";
-                  cuerpo+="apellidomadre: "+vec[i].apellidomadre+"\n";
-                  cuerpo+="fechanac: "+vec[i].fechanac+"\n";
-                  cuerpo+= "----------------------\n";
+                    for(var i=0;i<vec.length;i++)
+                    { 
+                      cuerpo+="noacta: "+vec[i].noacta+"\n";
+                      cuerpo+="nombre: "+vec[i].nombre+"\n";
+                      cuerpo+="apellido: "+vec[i].apellidos+"\n";
+                      cuerpo+="dpipadre: "+vec[i].dpipadre+"\n";
+                      cuerpo+="nombrepadre: "+vec[i].nombrepadre+"\n";
+                      cuerpo+="apellidopadre: "+vec[i].apellidopadre+"\n";
+                      cuerpo+="dpimadre: "+vec[i].dpimadre+"\n";
+                      cuerpo+="nombremadre: "+vec[i].nombremadre+"\n";
+                      cuerpo+="apellidomadre: "+vec[i].apellidomadre+"\n";
+                      cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                      cuerpo+= "----------------------\n";
 
-                }
-                datos.info=cuerpo;
-                var doc = new PDF();
-                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
-                doc.text(cuerpo,{
-	              align: 'justify'
-                });
-                doc.end();
-                datos.reporte=__dirname + '/reportes/reporte.pdf';
+                    }
+                    datos.info=cuerpo;
+                    var doc = new PDF();
+                    doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                    doc.text(cuerpo,{
+                    align: 'justify'
+                    });
+                    doc.end();
+                    datos.reporte=__dirname + '/reportes/reporte.pdf';
+              }
+              else
+              {
+
+                  if(response.data.estado='200')
+                  {
+                    datos.info=JSON.stringify(response.data.info);
+                    var vec=response.data.info;
+                    var cuerpo="reporte actas de nacimineto \n";
+                    for(var i=0;i<vec.length;i++)
+                    { 
+                      cuerpo+="noacta: "+vec[i].noacta+"\n";
+                      cuerpo+="nombre: "+vec[i].nombre+"\n";
+                      cuerpo+="apellido: "+vec[i].apellidos+"\n";
+                      cuerpo+="dpipadre: "+vec[i].dpipadre+"\n";
+                      cuerpo+="nombrepadre: "+vec[i].nombrepadre+"\n";
+                      cuerpo+="apellidopadre: "+vec[i].apellidopadre+"\n";
+                      cuerpo+="dpimadre: "+vec[i].dpimadre+"\n";
+                      cuerpo+="nombremadre: "+vec[i].nombremadre+"\n";
+                      cuerpo+="apellidomadre: "+vec[i].apellidomadre+"\n";
+                      cuerpo+="fechanac: "+vec[i].fechanac+"\n";
+                      cuerpo+= "----------------------\n";
+
+                    }
+                    datos.info=cuerpo;
+                    var doc = new PDF();
+                    doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                    doc.text(cuerpo,{
+                    align: 'justify'
+                    });
+                    doc.end();
+                    datos.reporte=__dirname + '/reportes/reporte.pdf';
+                  }
               }
              
 
