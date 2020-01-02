@@ -60,7 +60,7 @@ app.post('/setNacimiento',async(req,res)=>
       mensaje:"llego a set nacimineto set nacimento"
     };
     res.end(JSON.stringify(respuesta));*/
-    connection.query('call setNacimiento(\''+parametos.nombres+'\',\''+parametos.apellidos+'\','+parametos.dpipapa+','+parametos.dpimama+',\''+parametos.fecha+'\',\''+parametos.genero+'\','+parametos.municipio+');', function(err, rows, fields) {  
+    connection.query('call setNacimiento(\''+parametos.nombre+'\',\''+parametos.apellido+'\','+parametos.dpipadre+','+parametos.dpimadre+',\''+parametos.fechanacimiento+'\',\''+parametos.genero+'\','+parametos.municipio+','+parametros.departamento+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);
       var r=rows[0];
@@ -95,7 +95,7 @@ app.post('/getNacimiento',async(req,res)=>
     {
       estado:"ok",
       mensaje:"ddd"
-    };
+    }; //municipio + departamento
     connection.query('call getNacimiento('+parametos.dpipadremadre+');', function(err, rows, fields) {  
       if (err) throw err;
       console.log(rows);

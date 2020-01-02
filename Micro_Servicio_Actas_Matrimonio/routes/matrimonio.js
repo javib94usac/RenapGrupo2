@@ -22,8 +22,9 @@ router.post("/", function(req, res, next) {
           
           datos.resultado = "Datos a procesar correctos";
           var ip = req.body.esb; // GENERAR LA VARIABLE DE LA IP, VERIFICAR SI ES POST O GET
+          var puerto = req.body.puerto;
           var parametros ={
-              url: "http://"+ip+":9006/setMatrimonio",
+              url: "http://" + ip + ":" + puerto +"/setMatrimonio",
               tipo: 'POST',
               parametros: datos
 

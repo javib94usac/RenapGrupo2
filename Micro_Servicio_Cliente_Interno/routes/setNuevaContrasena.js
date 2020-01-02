@@ -27,9 +27,10 @@ router.get('/', function(req, res, next) {
             {
                 datos.resultado="todo correcto";
                 var ip=req.query.esb;
+              var puerto = req.body.puerto; 
                 var parametros=
               {
-                url:"http://"+ip+":9006/setNuevaContraseña", //localhost:3001/verdatos
+                url:"http://"+ip+":"+puerto+"/setNuevaContraseña", //localhost:3001/verdatos
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
