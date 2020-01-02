@@ -13,12 +13,12 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   var datos=
   {
-      dpipapa: req.body.dpiPapa,
-      dpimama: req.body.dpiMama,
-      apellidos:req.body.apellidos,
-      nombres: req.body.nombres,
+      dpipadre: req.body.dpiPapa,
+      dpimadre: req.body.dpiMama,
+      apellido:req.body.apellidos,
+      nombre: req.body.nombres,
       genero:req.body.genero,
-      fecha:req.body.fecha,
+      fechanacimiento:req.body.fecha,
       departamento:req.body.departamento,
       municipio:req.body.municipio,
       resultado:"acta en proceso",
@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
         }
       }*/
   console.log(datos); 
-  var comprobar= new compro(datos.dpipapa,datos.dpimama,datos.nombres,datos.apellidos,datos.municipio,datos.departamento,datos.fecha);
+  var comprobar= new compro(datos.dpipadre,datos.dpimadre,datos.nombre,datos.apellido,datos.municipio,datos.departamento,datos.fechanacimiento);
   if(comprobar.get_vacio())
   {
     if (comprobar.get_dpi_validos())
@@ -44,14 +44,16 @@ router.post('/', function(req, res, next) {
         {
           datos.resultado="datos de acta correcto";
           var ip=req.body.esb; // GENERAR LA VARIABLE DE LA IP, VERIFICAR SI ES POST O GET
-          var puerto=req.body.puerto;
+          var puerto=req.body.puerto;// 2020 declarar variable
           var parametros=
           {     // EN EL HTTP SE COLOCA EL NOMBRE DE LA VARIABLE DECLARADA
+            // agrego lo del puerto
             url:"http://"+ip+":"+puerto+"/setNacimiento", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
           // uri es la url del esp ip:puerto post/comunicacion
+
           let uri="http://"+ip+":10000/post/comunicacionesb"; // SE TOMA TODA ESTA LINEA COMPLETA EN CADA MICROSERVICIO
           axios.post(uri,parametros) // el json datos
           .then(function (response) {

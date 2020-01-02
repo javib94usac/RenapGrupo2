@@ -22,8 +22,10 @@ router.post('/', function(req, res, next) {
        
           datos.resultado="datos de acta correcto"
             var ip = req.body.esb;
+            var puerto = req.body.puerto;// 2020 declarar variable
             var parametros = {
-              url: "http://"+ip+":9006/setDefuncion",
+              
+              url: "http://"+ip+":"+puerto+"/setDefuncion",
               tipo: "POST",
               parametros : datos
               

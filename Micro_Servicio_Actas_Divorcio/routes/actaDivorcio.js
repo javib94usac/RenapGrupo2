@@ -22,9 +22,10 @@ router.post('/', function(req, res, next) {
     {
         datos.resultado="datos de acta correcto";
       var ip = req.body.esb; 
+      var puerto = req.body.puerto;
         var parametros=
           {
-            url:"http://"+ip+":9006/setDivorcio", //localhost:3001/verdatos
+            url: "http://" + ip + ":" + puerto +"/setDivorcio", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
