@@ -44,9 +44,10 @@ router.post('/', function(req, res, next) {
         {
           datos.resultado="datos de acta correcto";
           var ip=req.body.esb; // GENERAR LA VARIABLE DE LA IP, VERIFICAR SI ES POST O GET
+          var puerto=req.body.puerto;
           var parametros=
           {     // EN EL HTTP SE COLOCA EL NOMBRE DE LA VARIABLE DECLARADA
-            url:"http://"+ip+":9006/setNacimiento", //localhost:3001/verdatos
+            url:"http://"+ip+":"+puerto+"/setNacimiento", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
