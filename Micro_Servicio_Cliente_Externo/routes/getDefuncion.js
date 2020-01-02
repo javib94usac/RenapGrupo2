@@ -40,14 +40,15 @@ router.post('/', function(req, res, next) {
         
           datos.resultado="datos de acta correcto";
           var ip=req.body.esb;
+          var puerto=req.body.puerto;
           var parametros=
           {
-            url:"http://"+ip+":9006/getDefuncion", //localhost:3001/verdatos
+            url:"http://"+ip+":"+puerto+"/getDefuncion", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
           // uri es la url del esp ip:puerto post/comunicacion
-          var uri= "http://"+ip+":10000/post/comunicacionesb"
+          var uri= "http://"+ip+":10000/post/comunicacionesb";
           axios.post(uri,parametros) // el json datos
           .then(function (response) {
               console.log("Todo correcto en el request POST");
@@ -55,29 +56,55 @@ router.post('/', function(req, res, next) {
               //res.end(response);
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
-              if(response.data.estado='200')
+              if(puerto!='9006')
               {
-                datos.info=JSON.stringify(response.data.info);
-                var vec=response.data.info;
-                var cuerpo="reporte actas defuncion \n";
-                for(var i=0;i<vec.length;i++)
-                { 
-                  cuerpo+="nodefuncion: "+vec[i].nodefuncion+"\n";
-                  cuerpo+="fecha: "+vec[i].fecha+"\n";
-                  cuerpo+="nombre: "+vec[i].nombre+"\n";
-                  cuerpo+="apellido : "+vec[i].apellido+"\n";
-                  cuerpo+= "----------------------\n";
+                    
+                    var vec=response.data;
+                    var cuerpo="reporte actas defuncion \n";
+                    for(var i=0;i<vec.length;i++)
+                    { 
+                      cuerpo+="nodefuncion: "+vec[i].nodefuncion+"\n";
+                      cuerpo+="fecha: "+vec[i].fecha+"\n";
+                      cuerpo+="nombre: "+vec[i].nombre+"\n";
+                      cuerpo+="apellido : "+vec[i].apellido+"\n";
+                      cuerpo+= "----------------------\n";
 
-                }
-                datos.info=cuerpo;
-                var doc = new PDF();
-                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
-                doc.text(cuerpo,{
-	              align: 'justify'
-                });
-                doc.end();
-                datos.reporte=__dirname + '/reportes/reporte.pdf';
+                    }
+                    datos.info=cuerpo;
+                    var doc = new PDF();
+                    doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                    doc.text(cuerpo,{
+                    align: 'justify'
+                    });
+                    doc.end();
+                    datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
+              else{
+                  if(response.data.estado='200')
+                  {
+                    datos.info=JSON.stringify(response.data.info);
+                    var vec=response.data.info;
+                    var cuerpo="reporte actas defuncion \n";
+                    for(var i=0;i<vec.length;i++)
+                    { 
+                      cuerpo+="nodefuncion: "+vec[i].nodefuncion+"\n";
+                      cuerpo+="fecha: "+vec[i].fecha+"\n";
+                      cuerpo+="nombre: "+vec[i].nombre+"\n";
+                      cuerpo+="apellido : "+vec[i].apellido+"\n";
+                      cuerpo+= "----------------------\n";
+
+                    }
+                    datos.info=cuerpo;
+                    var doc = new PDF();
+                    doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                    doc.text(cuerpo,{
+                    align: 'justify'
+                    });
+                    doc.end();
+                    datos.reporte=__dirname + '/reportes/reporte.pdf';
+                  }
+              }
+              
 
           })
           .catch(function (error) {

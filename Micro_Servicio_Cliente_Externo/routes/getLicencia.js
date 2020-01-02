@@ -40,9 +40,10 @@ router.post('/', function(req, res, next) {
         
           datos.resultado="datos de acta correcto";
           var ip =req.body.esb;
+          var puerto=req.body.puerto;
           var parametros=
           {
-            url:"http://"+ip+":9006/getLicencia", //localhost:3001/verdatos
+            url:"http://"+ip+":"+puerto+"/getLicencia", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
@@ -55,34 +56,64 @@ router.post('/', function(req, res, next) {
               //res.end(response);
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
-              if(response.data.estado='200')
+              if(puerto!='9006')
               {
-                datos.info=JSON.stringify(response.data.info);
-                var vec=response.data.info;
-                var cuerpo="reporte Licencia \n";
-                //for(var i=0;i<vec.length;i++)
-                //{ 
-                  
-                  cuerpo+="nombre: "+vec.nombre+"\n";
-                  cuerpo+="apellidos: "+vec.apellidos+"\n";
-                  cuerpo+="fechanac: "+vec.fechanac+"\n";
-                  cuerpo+="tipo: "+vec.tipo+"\n";
-                  cuerpo+="anosAntiguedad: "+vec.anosAntiguedad+"\n";
-                  cuerpo+="genero: "+vec.genero+"\n";
-                  cuerpo+="dpi: "+vec.dpi+"\n";
-                  cuerpo+= "----------------------\n";
-
-                //}
-                datos.info=cuerpo;
-                var doc = new PDF();
-                doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
-                doc.text(cuerpo,{
-	              align: 'justify'
-                });
-                doc.end();
-                datos.reporte=__dirname + '/reportes/reporte.pdf';
+                  var vec=response.data;
+                  var cuerpo="reporte Licencia \n";
+                  //for(var i=0;i<vec.length;i++)
+                  //{ 
+                    
+                    cuerpo+="nombre: "+vec.nombre+"\n";
+                    cuerpo+="apellidos: "+vec.apellidos+"\n";
+                    cuerpo+="fechanac: "+vec.fechanac+"\n";
+                    cuerpo+="tipo: "+vec.tipo+"\n";
+                    cuerpo+="anosAntiguedad: "+vec.anosAntiguedad+"\n";
+                    cuerpo+="genero: "+vec.genero+"\n";
+                    cuerpo+="dpi: "+vec.dpi+"\n";
+                    cuerpo+= "----------------------\n";
+  
+                  //}
+                  datos.info=cuerpo;
+                  var doc = new PDF();
+                  doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                  doc.text(cuerpo,{
+                  align: 'justify'
+                  });
+                  doc.end();
+                  datos.reporte=__dirname + '/reportes/reporte.pdf';
               }
-
+              else
+              {
+                if(response.data.estado='200')
+                {
+                  datos.info=JSON.stringify(response.data.info);
+                  var vec=response.data.info;
+                  var cuerpo="reporte Licencia \n";
+                  //for(var i=0;i<vec.length;i++)
+                  //{ 
+                    
+                    cuerpo+="nombre: "+vec.nombre+"\n";
+                    cuerpo+="apellidos: "+vec.apellidos+"\n";
+                    cuerpo+="fechanac: "+vec.fechanac+"\n";
+                    cuerpo+="tipo: "+vec.tipo+"\n";
+                    cuerpo+="anosAntiguedad: "+vec.anosAntiguedad+"\n";
+                    cuerpo+="genero: "+vec.genero+"\n";
+                    cuerpo+="dpi: "+vec.dpi+"\n";
+                    cuerpo+= "----------------------\n";
+  
+                  //}
+                  datos.info=cuerpo;
+                  var doc = new PDF();
+                  doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                  doc.text(cuerpo,{
+                  align: 'justify'
+                  });
+                  doc.end();
+                  datos.reporte=__dirname + '/reportes/reporte.pdf';
+                }
+  
+              }
+            
           })
           .catch(function (error) {
               console.log("Error en el request POST");

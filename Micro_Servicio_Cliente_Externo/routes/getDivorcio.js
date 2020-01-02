@@ -40,9 +40,10 @@ router.post('/', function(req, res, next) {
         
           datos.resultado="datos de acta correcto";
           var ip=req.body.esb;
+          var puerto=req.body.puerto;
           var parametros=
           {
-            url:"http://"+ip+":9006/getDivorcio", //localhost:3001/verdatos
+            url:"http://"+ip+":"+puerto+"/getDivorcio", //localhost:3001/verdatos
             tipo:"POST",// si es post o get // post
             parametros:datos //mis datos 
           }; 
@@ -55,10 +56,9 @@ router.post('/', function(req, res, next) {
               //res.end(response);
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
-              if(response.data.estado='200')
+              if(puerto!='9006')
               {
-                datos.info=JSON.stringify(response.data.info);
-                var vec=response.data.info;
+                var vec=response.data;
                 var cuerpo="reporte actas divorcio \n";
                 for(var i=0;i<vec.length;i++)
                 { 
@@ -77,11 +77,44 @@ router.post('/', function(req, res, next) {
                 var doc = new PDF();
                 doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
                 doc.text(cuerpo,{
-	              align: 'justify'
+                align: 'justify'
                 });
                 doc.end();
                 datos.reporte=__dirname + '/reportes/reporte.pdf';
+
               }
+              else
+              {
+                  if(response.data.estado='200')
+                  {
+                    datos.info=JSON.stringify(response.data.info);
+                    var vec=response.data.info;
+                    var cuerpo="reporte actas divorcio \n";
+                    for(var i=0;i<vec.length;i++)
+                    { 
+                      cuerpo+="nodivorcio: "+vec[i].nodivorcio+"\n";
+                      cuerpo+="fecha: "+vec[i].fecha+"\n";
+                      cuerpo+="dpihombre "+vec[i].dpihombre+"\n";
+                      cuerpo+="nombrehombre: "+vec[i].nombrehombre+"\n";
+                      cuerpo+="apellidohombre : "+vec[i].apellidohombre+"\n";
+                      cuerpo+="dpimujer "+vec[i].dpimujer+"\n";
+                      cuerpo+="nombremujer: "+vec[i].nombremujer+"\n";
+                      cuerpo+="apellidomujer : "+vec[i].apellidomujer+"\n";
+                      cuerpo+= "----------------------\n";
+
+                    }
+                    datos.info=cuerpo;
+                    var doc = new PDF();
+                    doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte.pdf'));
+                    doc.text(cuerpo,{
+                    align: 'justify'
+                    });
+                    doc.end();
+                    datos.reporte=__dirname + '/reportes/reporte.pdf';
+                  }
+
+              }
+              
 
           })
           .catch(function (error) {
