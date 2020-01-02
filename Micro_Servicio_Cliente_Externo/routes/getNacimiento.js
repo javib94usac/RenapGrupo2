@@ -56,6 +56,8 @@ router.post('/', function(req, res, next) {
               //res.end(response);
               datos.resultado=response.data.mensaje;
               console.log(datos.resultado);
+              console.log(response.data);
+
               if(response.data.estado='200')
               {
                 datos.info=JSON.stringify(response.data.info);
