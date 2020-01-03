@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
                 var puerto = req.query.puerto;
                 var parametros=
               {
-                url: "http://" + ip + ":" + puerto +"setActualizar", //localhost:3001/verdatos
+                url: "http://" + ip + ":" + puerto +"/setActualizar", //localhost:3001/verdatos
                 tipo:"POST",// si es post o get // post
                 parametros:datos //mis datos 
               };
