@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
             {
                 datos.resultado="todo correcto";
                 var ip=req.query.esb;
-                var puerto = req.body.puerto;
+                var puerto = req.query.puerto;
                 var parametros=
               {
                 url: "http://" + ip + ":" + puerto +"setActualizar", //localhost:3001/verdatos
