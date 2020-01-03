@@ -58,6 +58,7 @@ router.post('/', function(req, res, next) {
               console.log(datos.resultado);
               if(puerto!='9006')
               {
+                  console.log(datos.resultado);
                   var vec=response.data;
                   var cuerpo="reporte Licencia \n";
                   //for(var i=0;i<vec.length;i++)

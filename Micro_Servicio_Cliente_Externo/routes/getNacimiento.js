@@ -61,6 +61,7 @@ router.post('/', function(req, res, next) {
             
               if(puerto!='9006')
               {
+                console.log(datos.resultado);
                 var vec=response.data;
                 var cuerpo="reporte actas de nacimineto \n";
                     for(var i=0;i<vec.length;i++)

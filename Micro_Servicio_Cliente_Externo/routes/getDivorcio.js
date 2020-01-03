@@ -58,6 +58,7 @@ router.post('/', function(req, res, next) {
               console.log(datos.resultado);
               if(puerto!='9006')
               {
+                console.log(response.data);
                 var vec=response.data;
                 var cuerpo="reporte actas divorcio \n";
                 for(var i=0;i<vec.length;i++)

@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
               //console.log(response.data);
               //res.end(response);
               datos.resultado=response.data.mensaje;
-              console.log(datos.resultado);
+              console.log(response.data);
               if(puerto!='9006')
               {
                     console.log(datos.resultado);
