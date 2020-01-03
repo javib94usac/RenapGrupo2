@@ -489,10 +489,6 @@ app.post('/setDPI',async(req,res)=>
     var parametos=req.body.params;
     console.log("enta  set DPI");
     console.log(parametos);
-    //call setDpi(1000002610102,10000018,'dfg');
-    //var dp=parametos.numeroacta+""+;
-    
-    console.log(dp);
     connection.query('call setDpi('+parametos.numeroacta+','+'\'abcdefg\');', function(err, rows, fields) {
         if (err) throw err;
         console.log(rows);
