@@ -84,7 +84,7 @@ router.post('/', function(req, res, next) {
               }
               else 
               {
-                  if(response.data.estado='200')
+                  if(response.data.estado=='200')
                   {
                     datos.info=JSON.stringify(response.data.info);
                     var vec=response.data.info;
